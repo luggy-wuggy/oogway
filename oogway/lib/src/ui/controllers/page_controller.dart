@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// This [FlowController] is responsible for
 /// driving the Pageview of the flow. (next/previous/close).
@@ -52,17 +51,4 @@ class FlowController<T extends Enum> extends ChangeNotifier {
     pageController.dispose();
     super.dispose();
   }
-}
-
-final onboardFlowControllerProvider =
-    ChangeNotifierProvider<FlowController>((ref) {
-  throw UnimplementedError;
-});
-
-enum OnboardFlowPageType {
-  introduction,
-  name,
-  city,
-  passion,
-  finish,
 }

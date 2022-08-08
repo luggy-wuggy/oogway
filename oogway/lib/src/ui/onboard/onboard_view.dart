@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/constants/ui.dart';
 import 'package:oogway/src/ui/controllers/page_controller.dart';
+import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 import 'package:oogway/src/ui/onboard/widgets/arrow_back.dart';
 import 'package:oogway/src/ui/onboard/widgets/introduction_view.dart';
 import 'package:oogway/src/ui/onboard/widgets/name_view.dart';
 import 'package:oogway/src/ui/onboard/widgets/page_indicator.dart';
-import 'package:oogway/src/ui/widgets/long_button.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardView extends StatefulWidget {
   const OnboardView({Key? key}) : super(key: key);
