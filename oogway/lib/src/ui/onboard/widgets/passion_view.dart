@@ -11,8 +11,6 @@ class PassionView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //final onboardFlowController = ref.watch(onboardFlowControllerProvider);
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
