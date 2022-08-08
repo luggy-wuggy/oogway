@@ -1,4 +1,3 @@
-import 'package:oogway/src/app_providers.dart';
 import 'package:oogway/src/data/facades/charity_facade.dart';
 import 'package:oogway/swagger_generated_code/charity_navigator.swagger.dart';
 import 'package:riverpod/riverpod.dart';
