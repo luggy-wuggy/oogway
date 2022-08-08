@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/constants/ui.dart';
+import 'package:oogway/src/ui/controllers/onboard_animation_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
+import 'package:oogway/src/ui/onboard/widgets/passion_pills.dart';
 import 'package:oogway/src/ui/widgets/long_button.dart';
 
 class PassionView extends ConsumerWidget {
@@ -9,8 +11,6 @@ class PassionView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final onboardFlowController = ref.watch(onboardFlowControllerProvider);
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -24,12 +24,42 @@ class PassionView extends ConsumerWidget {
             fontWeight: FontWeight.w400,
           ),
         ),
-        const Spacer(flex: 2),
-        const Spacer(flex: 4),
-        OogwayLongButton(
-          title: "Continue",
-          onTap: () async {
-            await onboardFlowController.nextPage();
+        Expanded(
+          flex: 7,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Wrap(spacing: 5, runSpacing: 8, children: const [
+                SelectedPassionPills(title: "Animals"),
+                SelectedPassionPills(title: "Arts"),
+                SelectedPassionPills(title: "Public Policy"),
+                SelectedPassionPills(title: "Health"),
+              ]),
+              const SizedBox(height: 40),
+              Wrap(
+                spacing: 5,
+                runSpacing: 8,
+                children: const [
+                  NotSelectedPassionPills(title: "Education"),
+                  NotSelectedPassionPills(title: "Environment"),
+                  NotSelectedPassionPills(title: "Religion"),
+                  NotSelectedPassionPills(title: "Civil Rights"),
+                  NotSelectedPassionPills(title: "Community Development"),
+                ],
+              )
+            ],
+          ),
+        ),
+        Consumer(
+          builder: (context, ref, child) {
+            return OogwayLongButton(
+              title: "Continue",
+              onTap: () async {
+                ref.read(onboardAnimationControllerProvider).reverseAnimation();
+                ref.read(onboardFlowControllerProvider).nextPage();
+              },
+            );
           },
         ),
       ],

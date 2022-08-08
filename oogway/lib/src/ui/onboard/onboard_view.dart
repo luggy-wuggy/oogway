@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/constants/ui.dart';
+import 'package:oogway/src/ui/controllers/onboard_animation_controller.dart';
 import 'package:oogway/src/ui/controllers/page_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 import 'package:oogway/src/ui/onboard/widgets/arrow_back.dart';
@@ -13,21 +14,27 @@ import 'package:oogway/src/ui/onboard/widgets/name_view.dart';
 import 'package:oogway/src/ui/onboard/widgets/page_indicator.dart';
 import 'package:oogway/src/ui/onboard/widgets/passion_view.dart';
 
-class OnboardView extends StatefulWidget {
+class OnboardView extends ConsumerStatefulWidget {
   const OnboardView({Key? key}) : super(key: key);
 
   @override
-  State<OnboardView> createState() => _OnboardViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _OnboardViewState();
+
+  // @override
+  // State<OnboardView> createState() => _OnboardViewState();
 }
 
-class _OnboardViewState extends State<OnboardView> {
+class _OnboardViewState extends ConsumerState<OnboardView>
+    with SingleTickerProviderStateMixin {
   late final PageController pageController;
   late final List<Enum> flowTypeList;
+  late final OnboardAnimationController animationController;
 
   @override
   void initState() {
     pageController = PageController(initialPage: 0);
     flowTypeList = OnboardFlowPageType.values;
+    animationController = OnboardAnimationController(vsync: this);
 
     super.initState();
   }
@@ -41,7 +48,9 @@ class _OnboardViewState extends State<OnboardView> {
             pageController: pageController,
             flowTypeList: flowTypeList,
           ),
-        )
+        ),
+        onboardAnimationControllerProvider
+            .overrideWithValue(animationController),
       ],
       child: const _OnboardContent(),
     );
@@ -50,6 +59,7 @@ class _OnboardViewState extends State<OnboardView> {
   @override
   void dispose() {
     pageController.dispose();
+    animationController.dispose();
     super.dispose();
   }
 }
@@ -60,8 +70,11 @@ class _OnboardContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final onboardFlowController = ref.watch(onboardFlowControllerProvider);
+    final onboardAnimationController =
+        ref.watch(onboardAnimationControllerProvider);
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: OogwayColors.kPrimaryDarkColor,
       body: Stack(
         alignment: Alignment.center,
@@ -83,25 +96,33 @@ class _OnboardContent extends ConsumerWidget {
             ),
           ),
           AnimatedBuilder(
-            animation: onboardFlowController.pageController,
+            animation: onboardAnimationController,
             builder: ((context, child) {
-              late double translate;
+              double translateX =
+                  lerpDouble(-200, 24, onboardAnimationController.value) ?? 24;
 
-              if ((onboardFlowController.pageController.page ?? 0) >= 0 &&
-                  (onboardFlowController.pageController.page ?? 0) <= 1) {
-                translate = lerpDouble(
-                    -200, 24, onboardFlowController.pageController.page ?? 0)!;
-              } else {
-                translate = 24;
+              if (onboardFlowController.currentPage ==
+                      OnboardFlowPageType.finish ||
+                  onboardFlowController.currentPage ==
+                      OnboardFlowPageType.passion) {
+                translateX = 24;
               }
 
               return Positioned(
                 left: 0,
                 top: 60,
                 child: Transform.translate(
-                  offset: Offset(translate, 0),
+                  offset: Offset(translateX, 0),
                   child: OogwayArrowBack(
-                    onTap: () {
+                    onTap: () async {
+                      if (onboardFlowController.currentPage ==
+                          OnboardFlowPageType.name) {
+                        onboardAnimationController.reverseAnimation();
+                      }
+                      if (onboardFlowController.currentPage ==
+                          OnboardFlowPageType.finish) {
+                        onboardAnimationController.forwardAnimation();
+                      }
                       onboardFlowController.previousPage();
                     },
                   ),
@@ -110,22 +131,15 @@ class _OnboardContent extends ConsumerWidget {
             }),
           ),
           AnimatedBuilder(
-            animation: onboardFlowController.pageController,
+            animation: onboardAnimationController,
             builder: (context, child) {
-              late double translate;
-
-              if (((onboardFlowController.pageController.page ?? 0) >= 0 &&
-                  (onboardFlowController.pageController.page ?? 0) <= 1)) {
-                translate = lerpDouble(
-                    270, -12, onboardFlowController.pageController.page ?? 0)!;
-              } else {
-                translate = -12;
-              }
+              late double translateY =
+                  lerpDouble(180, -12, onboardAnimationController.value) ?? -12;
 
               return Positioned(
                 bottom: 0,
                 child: Transform.translate(
-                  offset: Offset(0, translate),
+                  offset: Offset(0, translateY),
                   child: const OogwayPageIndicator(),
                 ),
               );
