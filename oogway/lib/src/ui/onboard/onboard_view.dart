@@ -6,7 +6,9 @@ import 'package:oogway/src/common/constants/ui.dart';
 import 'package:oogway/src/ui/controllers/page_controller.dart';
 import 'package:oogway/src/ui/onboard/widgets/arrow_back.dart';
 import 'package:oogway/src/ui/onboard/widgets/introduction_view.dart';
+import 'package:oogway/src/ui/onboard/widgets/name_view.dart';
 import 'package:oogway/src/ui/onboard/widgets/page_indicator.dart';
+import 'package:oogway/src/ui/widgets/long_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardView extends StatefulWidget {
@@ -71,7 +73,7 @@ class _OnboardContent extends ConsumerWidget {
               controller: onboardFlowController.pageController,
               children: const [
                 IntroductionView(),
-                IntroductionView(),
+                NameView(),
                 IntroductionView(),
                 IntroductionView(),
                 IntroductionView(),
@@ -135,13 +137,13 @@ class _OnboardContent extends ConsumerWidget {
 
               if (((onboardFlowController.pageController.page ?? 0) >= 0 &&
                   (onboardFlowController.pageController.page ?? 0) <= 1)) {
-                translate = lerpDouble(-150, -340,
+                translate = lerpDouble(-150, -360,
                     onboardFlowController.pageController.page ?? 0)!;
                 scale = lerpDouble(
-                    1, 0.8, onboardFlowController.pageController.page ?? 0)!;
+                    1, 0.72, onboardFlowController.pageController.page ?? 0)!;
               } else {
-                translate = -340;
-                scale = 0.8;
+                translate = -360;
+                scale = 0.72;
               }
 
               return Transform.scale(
