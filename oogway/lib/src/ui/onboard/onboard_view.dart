@@ -10,6 +10,7 @@ import 'package:oogway/src/ui/onboard/widgets/city_view.dart';
 import 'package:oogway/src/ui/onboard/widgets/introduction_view.dart';
 import 'package:oogway/src/ui/onboard/widgets/name_view.dart';
 import 'package:oogway/src/ui/onboard/widgets/page_indicator.dart';
+import 'package:oogway/src/ui/onboard/widgets/passion_view.dart';
 
 class OnboardView extends StatefulWidget {
   const OnboardView({Key? key}) : super(key: key);
@@ -75,7 +76,7 @@ class _OnboardContent extends ConsumerWidget {
                 IntroductionView(),
                 NameView(),
                 CityView(),
-                IntroductionView(),
+                PassionView(),
                 IntroductionView(),
               ],
             ),
