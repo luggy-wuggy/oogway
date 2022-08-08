@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/constants/ui.dart';
+import 'package:oogway/src/ui/controllers/onboard_animation_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 import 'package:oogway/src/ui/widgets/long_button.dart';
 
@@ -9,7 +10,7 @@ class PassionView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final onboardFlowController = ref.watch(onboardFlowControllerProvider);
+    //final onboardFlowController = ref.watch(onboardFlowControllerProvider);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -26,10 +27,15 @@ class PassionView extends ConsumerWidget {
         ),
         const Spacer(flex: 2),
         const Spacer(flex: 4),
-        OogwayLongButton(
-          title: "Continue",
-          onTap: () async {
-            await onboardFlowController.nextPage();
+        Consumer(
+          builder: (context, ref, child) {
+            return OogwayLongButton(
+              title: "Continue",
+              onTap: () async {
+                ref.read(onboardAnimationControllerProvider).reverseAnimation();
+                ref.read(onboardFlowControllerProvider).nextPage();
+              },
+            );
           },
         ),
       ],
