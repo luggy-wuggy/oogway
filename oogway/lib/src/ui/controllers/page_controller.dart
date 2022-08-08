@@ -28,7 +28,7 @@ class FlowController<T extends Enum> extends ChangeNotifier {
       return;
     }
     pageController.nextPage(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 850),
       curve: Curves.easeInOutCubicEmphasized,
     );
     _currentPage = flowTypeList[currentIndex + 1];
@@ -40,7 +40,7 @@ class FlowController<T extends Enum> extends ChangeNotifier {
       return;
     }
     pageController.previousPage(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 850),
       curve: Curves.easeInOutCubicEmphasized,
     );
     _currentPage = flowTypeList[currentIndex - 1];
