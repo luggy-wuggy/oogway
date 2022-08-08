@@ -1,0 +1,19 @@
+targets:
+  $default:
+    sources:     
+      - lib/**
+      - input_folder/**
+      - $package$
+    builders:
+      chopper_generator:
+        options:
+          header: "//Generated code"
+      swagger_dart_code_generator:
+        options:
+          input_folder: "input_folder/"
+          output_folder: "lib/swagger_generated_code/"
+          nullable_models:
+            - "AdvisoryCollectionLink"
+            - "OrganizationLink"
+
+          

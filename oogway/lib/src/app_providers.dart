@@ -1,10 +1,10 @@
-import 'package:oogway_api/oogway_api.dart';
+import 'package:oogway/swagger_generated_code/charity_navigator.swagger.dart';
 import 'package:riverpod/riverpod.dart';
 
-final oogwayApiProvider = Provider<OogwayApi>(
+final charityNavigatorApiProvider = Provider<CharityNavigator>(
   (ref) {
-    final oogwayApi = OogwayApi();
+    final charityNavigator = CharityNavigator.create();
 
-    return OogwayApi();
+    return charityNavigator;
   },
 );

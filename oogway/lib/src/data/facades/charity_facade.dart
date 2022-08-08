@@ -1,25 +1,32 @@
 import 'package:oogway/src/app_providers.dart';
-import 'package:oogway_api/oogway_api.dart';
+import 'package:oogway/src/common/constants/charity_navigator.dart';
+import 'package:oogway/swagger_generated_code/charity_navigator.swagger.dart';
 import 'package:riverpod/riverpod.dart';
 
-class CharityFacade {
-  CharityFacade({required this.charityApi});
+class CharityNavigatorFacade {
+  CharityNavigatorFacade({required this.api});
 
-  final OrganizationCollectionApi charityApi;
+  final CharityNavigator api;
 
-  Future<void> fetchOrganizations() async {
-    charityApi.searchOrganizations(
-      appId: "a71b11e3",
-      appKey: "14e84a0b33b1264879cf00974fe28b0c",
-      rated: true,
-      pageSize: 10,
-      categoryID: "2",
-    );
+  Future<List<OrganizationCollectionItem>?> fetchOrganizations() async {
+    try {
+      final response = await api.organizationsGet(
+        appId: CharityApiKeys.appId,
+        appKey: CharityApiKeys.appKey,
+      );
+
+      if (response.isSuccessful) {
+        return response.body;
+      }
+    } catch (e) {
+      rethrow;
+    }
+    return null;
   }
 }
 
-final accountFacadeProvider = Provider<CharityFacade>((ref) {
-  final oogwayApi = ref.read(oogwayApiProvider);
+final charityFacadeProvider = Provider<CharityNavigatorFacade>((ref) {
+  final charityNavigatorApi = ref.read(charityNavigatorApiProvider);
 
-  return CharityFacade(charityApi: oogwayApi.getOrganizationCollectionApi());
+  return CharityNavigatorFacade(api: charityNavigatorApi);
 });
