@@ -11,58 +11,67 @@ class PassionView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Spacer(flex: 3),
-        const Text(
-          "Let’s find the right charity.\nWhat are you passionate about?\n(select all that apply)",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: OogwayColors.kPrimaryLightColor,
-            fontSize: 22,
-            fontWeight: FontWeight.w400,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Spacer(flex: 3),
+          const Text(
+            "Let’s find the right charity.\nWhat are you passionate about?\n(select all that apply)",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: OogwayColors.kPrimaryLightColor,
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+            ),
           ),
-        ),
-        Expanded(
-          flex: 7,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Wrap(spacing: 5, runSpacing: 8, children: const [
-                SelectedPassionPills(title: "Animals"),
-                SelectedPassionPills(title: "Arts"),
-                SelectedPassionPills(title: "Public Policy"),
-                SelectedPassionPills(title: "Health"),
-              ]),
-              const SizedBox(height: 40),
-              Wrap(
-                spacing: 5,
-                runSpacing: 8,
-                children: const [
-                  NotSelectedPassionPills(title: "Education"),
-                  NotSelectedPassionPills(title: "Environment"),
-                  NotSelectedPassionPills(title: "Religion"),
-                  NotSelectedPassionPills(title: "Civil Rights"),
-                  NotSelectedPassionPills(title: "Community Development"),
-                ],
-              )
-            ],
+          Expanded(
+            flex: 7,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(spacing: 5, runSpacing: 8, children: const [
+                  // SelectedPassionPills(title: "Animals"),
+                  // SelectedPassionPills(title: "Arts"),
+                  // SelectedPassionPills(title: "Public Policy"),
+                  // SelectedPassionPills(title: "Health"),
+                ]),
+                // const SizedBox(height: 40),
+                Wrap(
+                  spacing: 5,
+                  runSpacing: 8,
+                  children: const [
+                    NotSelectedPassionPills(title: "Animals"),
+                    NotSelectedPassionPills(title: "Arts"),
+                    NotSelectedPassionPills(title: "Public Policy"),
+                    NotSelectedPassionPills(title: "Health"),
+                    NotSelectedPassionPills(title: "Education"),
+                    NotSelectedPassionPills(title: "Environment"),
+                    NotSelectedPassionPills(title: "Religion"),
+                    NotSelectedPassionPills(title: "Civil Rights"),
+                    NotSelectedPassionPills(title: "Community Development"),
+                  ],
+                )
+              ],
+            ),
           ),
-        ),
-        Consumer(
-          builder: (context, ref, child) {
-            return OogwayLongButton(
-              title: "Continue",
-              onTap: () async {
-                ref.read(onboardAnimationControllerProvider).reverseAnimation();
-                ref.read(onboardFlowControllerProvider).nextPage();
-              },
-            );
-          },
-        ),
-      ],
+          Consumer(
+            builder: (context, ref, child) {
+              return OogwayLongButton(
+                title: "Continue",
+                onTap: () async {
+                  ref
+                      .read(onboardAnimationControllerProvider)
+                      .reverseAnimation();
+                  ref.read(onboardFlowControllerProvider).nextPage();
+                },
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
