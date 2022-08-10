@@ -17,6 +17,8 @@ import 'package:oogway/src/ui/onboard/widgets/passion_view.dart';
 class OnboardView extends ConsumerStatefulWidget {
   const OnboardView({Key? key}) : super(key: key);
 
+  static const String routeName = 'onboard';
+
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _OnboardViewState();
 
