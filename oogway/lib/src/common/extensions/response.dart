@@ -5,3 +5,4 @@
 
 //   bool get isConflict => (statusCode ?? 0) == 409;
 // }
+
