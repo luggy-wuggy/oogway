@@ -21,9 +21,6 @@ class OnboardView extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _OnboardViewState();
-
-  // @override
-  // State<OnboardView> createState() => _OnboardViewState();
 }
 
 class _OnboardViewState extends ConsumerState<OnboardView>
