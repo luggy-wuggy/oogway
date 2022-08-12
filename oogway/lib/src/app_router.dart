@@ -15,7 +15,7 @@ class OogwayRouter extends ChangeNotifier with Logging {
     notifyListeners();
   }
 
-  void logout() {
+  Future<void> logout() async {
     router = _loggedOutRoutes;
     notifyListeners();
   }
