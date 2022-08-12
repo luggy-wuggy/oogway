@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/constants/ui.dart';
 import 'package:oogway/src/ui/controllers/onboard_animation_controller.dart';
 import 'package:oogway/src/ui/controllers/page_controller.dart';
+import 'package:oogway/src/ui/onboard/controllers/onboard_action_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 import 'package:oogway/src/ui/onboard/widgets/arrow_back.dart';
 import 'package:oogway/src/ui/onboard/widgets/city_view.dart';
@@ -53,6 +54,7 @@ class _OnboardViewState extends ConsumerState<OnboardView>
         ),
         onboardAnimationControllerProvider
             .overrideWithValue(animationController),
+        onboardAcionControllerProvider,
       ],
       child: const _OnboardContent(),
     );

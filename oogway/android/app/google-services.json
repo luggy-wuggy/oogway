@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "29379866804",
+    "project_id": "charity-3e95f",
+    "storage_bucket": "charity-3e95f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29379866804:android:fe545c592bf72499dce7e1",
+        "android_client_info": {
+          "package_name": "com.example.oogway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29379866804-jiac1bjis1nphdi7a1nnteh9ri6pk7jf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArlpHo0fDT3Vv_ehl9I9YAiClfd6qC_gY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29379866804-jiac1bjis1nphdi7a1nnteh9ri6pk7jf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "29379866804-4f9rldkhh81dbv94g6iv0kfl45f4utck.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.charity",
+                "app_store_id": "727123"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
