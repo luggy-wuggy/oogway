@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:oogway/src/common/extensions/logger.dart';
 import 'package:oogway/src/common/extensions/map.dart';
 import 'package:oogway/src/ui/home/home_view.dart';
 import 'package:oogway/src/ui/onboard/onboard_view.dart';
 
-class OogwayRouter extends ChangeNotifier {
+class OogwayRouter extends ChangeNotifier with Logging {
   late var router = _loggedOutRoutes;
 
   Future<void> login() async {
     router = _loggedInRoutes;
+    logger.i("Router changed to _loggedInRoutes");
     notifyListeners();
   }
 

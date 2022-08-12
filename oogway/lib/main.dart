@@ -6,6 +6,7 @@ import 'package:oogway/firebase_options.dart';
 import 'package:oogway/src/app_router.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
