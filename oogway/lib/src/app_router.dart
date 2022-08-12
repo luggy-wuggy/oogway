@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oogway/src/common/extensions/logger.dart';
 import 'package:oogway/src/common/extensions/map.dart';
-import 'package:oogway/src/ui/home/home_view.dart';
+import 'package:oogway/src/ui/root/root_view.dart';
 import 'package:oogway/src/ui/onboard/onboard_view.dart';
 
 class OogwayRouter extends ChangeNotifier with Logging {
@@ -15,7 +15,7 @@ class OogwayRouter extends ChangeNotifier with Logging {
     notifyListeners();
   }
 
-  void logout() {
+  Future<void> logout() async {
     router = _loggedOutRoutes;
     notifyListeners();
   }
@@ -55,18 +55,18 @@ GoRouter get _loggedOutRoutes => GoRouter(
 GoRouter get _loggedInRoutes => GoRouter(
       routes: [
         GoRoute(
-          name: HomeView.routeName,
-          path: _routeMap.get(HomeView.routeName),
-          builder: (context, state) => const HomeView(),
+          name: RootView.routeName,
+          path: _routeMap.get(RootView.routeName),
+          builder: (context, state) => const RootView(),
         ),
       ],
       urlPathStrategy: UrlPathStrategy.path,
-      initialLocation: _routeMap.get(HomeView.routeName),
+      initialLocation: _routeMap.get(RootView.routeName),
     );
 
 const Map<String, String> _routeMap = {
   OnboardView.routeName: '/${OnboardView.routeName}',
-  HomeView.routeName: '/${HomeView.routeName}',
+  RootView.routeName: '/${RootView.routeName}',
 };
 
 final oogwayRouterProvider = ChangeNotifierProvider<OogwayRouter>((ref) {

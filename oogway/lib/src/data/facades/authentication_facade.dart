@@ -20,7 +20,7 @@ class AuthenticationFacade with Logging {
     }
   }
 
-  Future signOut() {
+  Future<void> signOut() {
     return firebaseAuth.signOut();
   }
 }
