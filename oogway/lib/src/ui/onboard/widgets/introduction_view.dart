@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/constants/ui.dart';
-import 'package:oogway/src/domain/usecases/account/sign_in_use_case.dart';
-import 'package:oogway/src/ui/controllers/onboard_animation_controller.dart';
+import 'package:oogway/src/ui/onboard/controllers/onboard_animation_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 import 'package:oogway/src/ui/widgets/long_button.dart';
 
