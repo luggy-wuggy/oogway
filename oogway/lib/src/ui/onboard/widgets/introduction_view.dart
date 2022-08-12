@@ -39,9 +39,8 @@ class IntroductionView extends StatelessWidget {
           builder: (context, ref, child) {
             return OogwayLongButton(
               onTap: () {
-                ref.read(signInUseCaseProvider).call();
-                // ref.read(onboardAnimationControllerProvider).forwardAnimation();
-                // ref.read(onboardFlowControllerProvider).nextPage();
+                ref.read(onboardAnimationControllerProvider).forwardAnimation();
+                ref.read(onboardFlowControllerProvider).nextPage();
               },
               title: "Hi Oogway!",
             );
