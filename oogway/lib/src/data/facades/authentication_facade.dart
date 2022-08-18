@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/extensions/logger.dart';
@@ -35,19 +34,3 @@ final authenticationFacadeProvider = Provider<AuthenticationFacade>((ref) {
 final authStateChangesProvider = StreamProvider<User?>(
   (ref) => ref.watch(authenticationFacadeProvider).authStateChanges,
 );
-
-class OogwayFirestoreDatabase {
-  final FirebaseFirestore database = FirebaseFirestore.instance;
-}
-
-// 3
-final databaseProvider = Provider<OogwayFirestoreDatabase?>((ref) {
-  final auth = ref.watch(authStateChangesProvider);
-
-  // we only have a valid DB if the user is signed in
-  if (auth.asData?.value?.uid != null) {
-    return OogwayFirestoreDatabase();
-  }
-  // else we return null
-  return null;
-});

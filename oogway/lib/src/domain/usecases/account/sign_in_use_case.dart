@@ -1,5 +1,5 @@
 import 'package:oogway/src/app_router.dart';
-import 'package:oogway/src/data/facades/authentication_facade.dart';
+import 'package:oogway/src/data/data.dart';
 import 'package:riverpod/riverpod.dart';
 
 class SignInUseCase {
