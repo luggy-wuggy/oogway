@@ -35,15 +35,14 @@ class OogwayLongButton extends StatefulWidget {
 
 class _OogwayLongButtonState extends State<OogwayLongButton> {
   bool _isPressDown = false;
-  static const double buttonHeight = 56;
+  static const double buttonHeight = 70;
+  static const double buttonWidth = 250;
+
   static const double scaleDownFx = 0.95;
-  static const int buttonScaleDuration = 50;
+  static const int buttonScaleDuration = 350;
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double buttonWidth = widget.width ?? size.width * 0.9;
-
     return Container(
       alignment: Alignment.center,
       height: buttonHeight,
@@ -81,7 +80,9 @@ class _OogwayLongButtonState extends State<OogwayLongButton> {
           height:
               _shouldScaleButton ? (buttonHeight * scaleDownFx) : buttonHeight,
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(_shouldScaleButton ? 12 : 10),
+            ),
             color: _buttonColor,
             border: Border.all(color: widget.borderColor),
           ),
@@ -102,10 +103,11 @@ class _OogwayLongButtonState extends State<OogwayLongButton> {
                     )
                   : Text(
                       widget.title ?? "",
-                      style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                            color: widget.childColor,
-                            fontWeight: FontWeight.w700,
-                          ),
+                      style: TextStyle(
+                        color: widget.childColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
         ),
       ),
