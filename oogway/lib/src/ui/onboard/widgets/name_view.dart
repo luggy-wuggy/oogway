@@ -31,9 +31,12 @@ class NameView extends ConsumerWidget {
         const Spacer(flex: 4),
         OogwayLongButton(
           title: "Continue",
-          onTap: () async {
+          onPressed: () async {
             ref.read(onboardAcionControllerProvider).submitName();
           },
+          backgroundColor: OogwayColors.kPrimaryLightColor,
+          pressedColor: OogwayColors.kPrimaryLightColor,
+          childColor: OogwayColors.kPrimaryDarkColor,
         ),
       ],
     );

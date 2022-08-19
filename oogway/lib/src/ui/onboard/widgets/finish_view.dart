@@ -35,7 +35,10 @@ class FinishView extends ConsumerWidget {
         const Spacer(flex: 1),
         OogwayLongButton(
           title: "Finish",
-          onTap: () async {
+          backgroundColor: OogwayColors.kPrimaryLightColor,
+          pressedColor: OogwayColors.kPrimaryLightColor,
+          childColor: OogwayColors.kPrimaryDarkColor,
+          onPressed: () async {
             ref.read(onboardAcionControllerProvider).finishOnboard();
           },
         ),

@@ -62,12 +62,15 @@ class PassionView extends ConsumerWidget {
             builder: (context, ref, child) {
               return OogwayLongButton(
                 title: "Continue",
-                onTap: () async {
+                onPressed: () async {
                   ref
                       .read(onboardAnimationControllerProvider)
                       .reverseAnimation();
                   ref.read(onboardAcionControllerProvider).submitPassions();
                 },
+                backgroundColor: OogwayColors.kPrimaryLightColor,
+                pressedColor: OogwayColors.kPrimaryLightColor,
+                childColor: OogwayColors.kPrimaryDarkColor,
               );
             },
           ),
