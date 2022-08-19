@@ -7,6 +7,7 @@ class Place {
   String? zipCode;
 
   Place({
+    this.placeID,
     this.streetNumber,
     this.street,
     this.city,

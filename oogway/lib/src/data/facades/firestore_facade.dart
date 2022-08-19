@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:oogway/src/common/extensions/logger.dart';
 import 'package:oogway/src/data/data.dart';
 import 'package:oogway/src/models/user.dart';
 import 'package:riverpod/riverpod.dart';
 
-class OogwayFirestoreDatabase {
+class OogwayFirestoreDatabase with Logging {
   final FirebaseFirestore _database = FirebaseFirestore.instance;
 
   Future<bool> createNewUser(OogwayUser user) async {
+    logger.i('Attempting to create a user in the database');
+
     try {
       await _database.collection('users').doc(user.id).set({
         "date": user.date,
@@ -27,9 +30,11 @@ class OogwayFirestoreDatabase {
         },
       );
 
+      logger.i('User ${user.id} created in the database!');
+
       return true;
     } catch (e) {
-      print(e);
+      logger.i('Failed to create User ${user.id} in the database: $e');
       return false;
     }
   }
@@ -96,14 +101,6 @@ class OogwayFirestoreDatabase {
   }
 }
 
-// 3
-final databaseProvider = Provider<OogwayFirestoreDatabase?>((ref) {
-  final auth = ref.watch(authStateChangesProvider);
-
-  // we only have a valid DB if the user is signed in
-  if (auth.asData?.value?.uid != null) {
-    return OogwayFirestoreDatabase();
-  }
-  // else we return null
-  return null;
+final firestoreDatabaseProvider = Provider<OogwayFirestoreDatabase>((ref) {
+  return OogwayFirestoreDatabase();
 });
