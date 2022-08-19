@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:oogway/src/domain/usecases/account/sign_in_use_case.dart';
+
+import 'package:oogway/src/domain/usecases/usecases.dart';
 import 'package:oogway/src/ui/controllers/page_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 

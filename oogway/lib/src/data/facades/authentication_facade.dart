@@ -30,3 +30,7 @@ final authenticationFacadeProvider = Provider<AuthenticationFacade>((ref) {
     firebaseAuth: FirebaseAuth.instance,
   );
 });
+
+final authStateChangesProvider = StreamProvider<User?>(
+  (ref) => ref.watch(authenticationFacadeProvider).authStateChanges,
+);
