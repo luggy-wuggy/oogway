@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/constants/ui.dart';
-import 'package:oogway/src/ui/controllers/passion_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_animation_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_action_controller.dart';
+import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 import 'package:oogway/src/ui/onboard/widgets/passion_pills.dart';
 import 'package:oogway/src/ui/widgets/long_button.dart';
 
@@ -43,7 +43,6 @@ class PassionView extends ConsumerWidget {
                       .map((e) => SelectedPassionPills(
                             title: e.enumToString(),
                             onTap: () {
-                              print('YES');
                               ref
                                   .read(passionSelectionControllerProvider)
                                   .unselectPassion(e);

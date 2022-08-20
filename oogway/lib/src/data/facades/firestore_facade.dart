@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:oogway/src/common/extensions/logger.dart';
-import 'package:oogway/src/data/data.dart';
 import 'package:oogway/src/models/user.dart';
+import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 import 'package:riverpod/riverpod.dart';
 
 class OogwayFirestoreDatabase with Logging {
@@ -14,6 +14,9 @@ class OogwayFirestoreDatabase with Logging {
       await _database.collection('users').doc(user.id).set({
         "date": user.date,
         "name": user.name,
+        "passions": user.passions?.map((Passion e) {
+          return e.enumToString();
+        }).toList(),
       });
 
       await _database
