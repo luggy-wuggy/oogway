@@ -3,6 +3,7 @@ import 'package:oogway/src/models/place.dart';
 
 class OogwayUser {
   late String? id;
+  late String? name;
   late DateTime? date;
   late Place? place;
 
@@ -12,6 +13,7 @@ class OogwayUser {
       DocumentSnapshot doc, DocumentSnapshot locDoc) {
     id = doc.id;
     date = doc['date'];
+    name = doc['name'];
     place?.city = locDoc["city"];
     place?.state = locDoc["state"];
     place?.street = locDoc["street"];

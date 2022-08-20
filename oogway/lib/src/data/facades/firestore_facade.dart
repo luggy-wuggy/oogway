@@ -13,6 +13,7 @@ class OogwayFirestoreDatabase with Logging {
     try {
       await _database.collection('users').doc(user.id).set({
         "date": user.date,
+        "name": user.name,
       });
 
       await _database

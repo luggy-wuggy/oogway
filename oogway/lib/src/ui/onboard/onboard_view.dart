@@ -78,7 +78,7 @@ class _OnboardContent extends ConsumerWidget {
         ref.watch(onboardAnimationControllerProvider);
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       backgroundColor: OogwayColors.kPrimaryDarkColor,
       body: Stack(
         alignment: Alignment.center,

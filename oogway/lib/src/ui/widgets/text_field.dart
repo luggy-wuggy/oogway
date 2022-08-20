@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:oogway/src/common/constants/ui.dart';
 
 class OogwayTextField extends StatelessWidget {
-  const OogwayTextField({Key? key, required this.hintText}) : super(key: key);
+  const OogwayTextField(
+      {Key? key, required this.hintText, required this.textEditingController})
+      : super(key: key);
 
   final String hintText;
+  final TextEditingController textEditingController;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 300,
       child: TextField(
+        controller: textEditingController,
         style: const TextStyle(
           color: OogwayColors.kPrimaryLightColor,
           fontSize: 18,

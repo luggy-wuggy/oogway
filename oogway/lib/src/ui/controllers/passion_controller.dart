@@ -3,24 +3,46 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
 
 class PassionSelectionController extends ChangeNotifier {
-  List<Passion> unselectedPassions = Passion.values.toList();
-  List<Passion> selectedPassions = [];
+  final List<Passion> _unselectedPassions = Passion.values.toList();
+  final List<Passion> _selectedPassions = [];
+
+  List<Passion> get selectedPassions {
+    // Returns an alphabetical list
+    _selectedPassions.sort(
+      (a, b) {
+        return a.enumToString()[0].compareTo(b.enumToString()[0]);
+      },
+    );
+
+    return _selectedPassions;
+  }
+
+  List<Passion> get unselectedPassions {
+    // Returns an alphabetical list
+    _unselectedPassions.sort(
+      (a, b) {
+        return a.enumToString()[0].compareTo(b.enumToString()[0]);
+      },
+    );
+
+    return _unselectedPassions;
+  }
 
   void selectPassion(Passion value) {
-    if (!selectedPassions.contains(value)) {
+    if (_selectedPassions.contains(value)) {
       return;
     }
-    selectedPassions.add(value);
-    unselectedPassions.remove(value);
+    _selectedPassions.add(value);
+    _unselectedPassions.remove(value);
     notifyListeners();
   }
 
   void unselectPassion(Passion value) {
-    if (unselectedPassions.contains(value)) {
+    if (_unselectedPassions.contains(value)) {
       return;
     }
-    selectedPassions.remove(value);
-    unselectedPassions.add(value);
+    _selectedPassions.remove(value);
+    _unselectedPassions.add(value);
     notifyListeners();
   }
 }

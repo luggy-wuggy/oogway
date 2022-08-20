@@ -51,7 +51,8 @@ class PassionView extends ConsumerWidget {
                           ))
                       .toList(),
                 ),
-                // const SizedBox(height: 40),
+                if (passionSelectionController.selectedPassions.isNotEmpty)
+                  const SizedBox(height: 16),
                 Wrap(
                   spacing: 5,
                   runSpacing: 8,
@@ -59,7 +60,6 @@ class PassionView extends ConsumerWidget {
                       .map((e) => NotSelectedPassionPills(
                             title: e.enumToString(),
                             onTap: () {
-                              print('YES');
                               ref
                                   .read(passionSelectionControllerProvider)
                                   .selectPassion(e);

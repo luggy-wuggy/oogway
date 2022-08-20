@@ -1,21 +1,27 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:oogway/src/common/extensions/logger.dart';
 
 import 'package:oogway/src/domain/usecases/usecases.dart';
+import 'package:oogway/src/models/user.dart';
 import 'package:oogway/src/ui/controllers/page_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 
-class OnboardActionController extends ChangeNotifier {
+class OnboardActionController extends ChangeNotifier with Logging {
   final Reader read;
 
   OnboardActionController({required this.read});
+
+  final OogwayUser user = OogwayUser();
 
   late final SignInUseCase signInUseCase = read(signInUseCaseProvider);
   late final FlowController onboardFlowController =
       read(onboardFlowControllerProvider);
 
   // TODO: biz logic
-  void submitName() {
+  Future submitName({required String name}) async {
+    user.name = name;
+    logger.i("USER name submited as ${user.name}");
     onboardFlowController.nextPage();
   }
 
@@ -30,7 +36,7 @@ class OnboardActionController extends ChangeNotifier {
   }
 
   void finishOnboard() async {
-    await signInUseCase.call();
+    await signInUseCase.call(user);
   }
 }
 
