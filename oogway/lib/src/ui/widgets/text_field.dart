@@ -6,13 +6,15 @@ class OogwayTextField extends StatelessWidget {
       {Key? key, required this.hintText, required this.textEditingController})
       : super(key: key);
 
+  static const double textFieldWidth = 300;
+
   final String hintText;
   final TextEditingController textEditingController;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 300,
+      width: textFieldWidth,
       child: TextField(
         controller: textEditingController,
         style: const TextStyle(

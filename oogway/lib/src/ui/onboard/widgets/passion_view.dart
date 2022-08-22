@@ -51,7 +51,7 @@ class PassionView extends ConsumerWidget {
                       .toList(),
                 ),
                 if (passionSelectionController.selectedPassions.isNotEmpty)
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
                 Wrap(
                   spacing: 5,
                   runSpacing: 8,

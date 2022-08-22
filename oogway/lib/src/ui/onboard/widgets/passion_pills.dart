@@ -70,7 +70,7 @@ class PassionPills extends StatelessWidget {
         child: Text(
           title,
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 18,
             color: textColor,
           ),
         ),

@@ -44,6 +44,7 @@ class _CityViewState extends ConsumerState<CityView> {
           hintText: "City or zip code",
           textEditingController: locationTextController,
         ),
+        const SizedBox(height: 12),
         const Spacer(flex: 4),
         OogwayLongButton(
           title: "Continue",
