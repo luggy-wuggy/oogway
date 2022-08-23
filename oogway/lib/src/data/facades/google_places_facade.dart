@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:oogway/src/common/extensions/response.dart';
 import 'package:oogway/src/models/google_places.dart';
 import 'package:riverpod/riverpod.dart';
 
 // TODO to consolidate the API keys in one place
-const String googlePlacesApiKey = "AIzaSyBk4m7TL12f_cHw6CiPvU0XZv06EB3S3Iw";
+final String? googlePlacesApiKey = dotenv
+    .env['GOOGLE_PLACES_KEY']; //"AIzaSyBk4m7TL12f_cHw6CiPvU0XZv06EB3S3Iw";
 
 const String googlePlacesAutocompleteBaseUrl =
     "https://maps.googleapis.com/maps/api/place/autocomplete/json?";
