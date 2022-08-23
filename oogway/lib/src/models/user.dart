@@ -3,13 +3,14 @@ import 'package:oogway/src/models/place.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 
 class OogwayUser {
-  late String? id;
-  late String? name;
-  late DateTime? date;
-  late Place? place;
-  late List<Passion>? passions;
+  String? id;
+  String? name;
+  DateTime? date;
+  Place? place = Place();
+  String? placeId;
+  List<Passion>? passions;
 
-  OogwayUser({this.id, this.date, this.place, this.passions});
+  OogwayUser({this.id, this.date, this.passions});
 
   OogwayUser.fromDocumentSnapshot(
       DocumentSnapshot doc, DocumentSnapshot locDoc) {

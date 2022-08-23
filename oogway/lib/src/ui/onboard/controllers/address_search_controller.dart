@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/domain/usecases/address_search/address_search.dart';
 import 'package:oogway/src/models/google_places.dart';
-import 'package:oogway/src/models/place.dart';
 
 class AddressSearchController extends ChangeNotifier {
   @protected
@@ -10,18 +9,19 @@ class AddressSearchController extends ChangeNotifier {
   @protected
   final GetAddressDetailsUseCase getAddressDetailsUseCase;
   List<PlaceSuggestion>? _suggestions = [];
-  late PlaceDetail? _selectedAddress;
-
-  /// Stores if the user already used autocomplete during the session.
-  /// Triggered when [getAddressDetails] is called.
-  bool _didUseAutocomplete = false;
+  PlaceDetail? _selectedAddress;
 
   AddressSearchController(
       {required this.getAddressSuggestionsUseCase,
       required this.getAddressDetailsUseCase});
 
   List<PlaceSuggestion> get suggestions => _suggestions ?? [];
-  bool get didUseAutocomplete => _didUseAutocomplete;
+
+  PlaceDetail? get selectedAddress => _selectedAddress;
+  set selectedAddress(PlaceDetail? placeDetail) {
+    _selectedAddress = placeDetail;
+    notifyListeners();
+  }
 
   Future<void> getAddressSuggestions({required String address}) async {
     if (address.isEmpty) {
@@ -33,10 +33,10 @@ class AddressSearchController extends ChangeNotifier {
   }
 
   Future<PlaceDetail?> getAddressDetails({required String placeId}) async {
-    _didUseAutocomplete = true;
-    notifyListeners();
-    _selectedAddress = await getAddressDetailsUseCase(placeId: placeId);
-    return await getAddressDetailsUseCase(placeId: placeId);
+    selectedAddress = await getAddressDetailsUseCase(placeId: placeId);
+
+    print(selectedAddress?.placeID);
+    return selectedAddress;
   }
 
   Future<void> clearAddressSuggestions() async {
@@ -46,7 +46,7 @@ class AddressSearchController extends ChangeNotifier {
 }
 
 final addressSearchControllerProvider =
-    ChangeNotifierProvider.autoDispose<AddressSearchController>(
+    ChangeNotifierProvider<AddressSearchController>(
   (ref) {
     return AddressSearchController(
       getAddressSuggestionsUseCase:

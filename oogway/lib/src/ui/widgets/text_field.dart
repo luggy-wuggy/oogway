@@ -25,7 +25,7 @@ class OogwayTextField extends StatelessWidget {
       child: SizedBox(
         width: textFieldWidth,
         child: TextField(
-          enabled: false,
+          enabled: onTap == null,
           controller: textEditingController,
           style: const TextStyle(
             color: OogwayColors.kPrimaryLightColor,

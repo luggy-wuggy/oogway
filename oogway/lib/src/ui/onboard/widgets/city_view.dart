@@ -73,7 +73,9 @@ class _CityViewState extends ConsumerState<CityView> {
           pressedColor: OogwayColors.kPrimaryLightColor,
           childColor: OogwayColors.kPrimaryDarkColor,
           onPressed: () async {
-            ref.read(onboardAcionControllerProvider).submitCity();
+            final placeDetail =
+                ref.read(addressSearchControllerProvider).selectedAddress;
+            ref.read(onboardAcionControllerProvider).submitCity(placeDetail);
           },
         ),
       ],
@@ -93,7 +95,7 @@ class _AddressBottomSheetContent extends ConsumerWidget {
     required this.onSelect,
   }) : super(key: key);
 
-  final Function(PlaceSuggestion placeDetail)? onSelect;
+  final Function(PlaceSuggestion placeSuggestion)? onSelect;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -208,14 +210,14 @@ class _AddressBottomSheetContent extends ConsumerWidget {
                               : const SizedBox.shrink(),
                           ListTile(
                             onTap: () async {
-                              final selectedPlace = await ref
+                              await ref
                                   .read(addressSearchControllerProvider)
                                   .getAddressDetails(
                                       placeId: suggestion.placeId);
 
-                              onSelect?.call(suggestion);
+                              await onSelect?.call(suggestion);
 
-                              Navigator.pop(context);
+                              Navigator.of(context).pop();
                             },
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 16),
