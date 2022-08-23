@@ -1,6 +1,5 @@
 import 'package:oogway/src/app_router.dart';
 import 'package:oogway/src/data/data.dart';
-import 'package:oogway/src/models/place.dart';
 import 'package:oogway/src/models/user.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -12,15 +11,12 @@ class SignInUseCase {
   final OogwayRouter router;
   final OogwayFirestoreDatabase database;
 
-  Future<void> call() async {
-    final user = await auth.signInAnonymously();
-    await database.createNewUser(
-      OogwayUser(
-        id: user?.user?.uid,
-        date: DateTime.now(),
-        place: Place(),
-      ),
-    );
+  Future<void> call(OogwayUser user) async {
+    final fbUser = await auth.signInAnonymously();
+    user.id = fbUser?.user?.uid;
+    user.date = DateTime.now();
+
+    await database.createNewUser(user);
     await router.login();
   }
 }

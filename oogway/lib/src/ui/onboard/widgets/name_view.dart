@@ -6,13 +6,24 @@ import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 import 'package:oogway/src/ui/widgets/long_button.dart';
 import 'package:oogway/src/ui/widgets/text_field.dart';
 
-class NameView extends ConsumerWidget {
+class NameView extends ConsumerStatefulWidget {
   const NameView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final onboardFlowController = ref.watch(onboardFlowControllerProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() => _NameViewState();
+}
 
+class _NameViewState extends ConsumerState<NameView> {
+  late final TextEditingController nameTextController;
+
+  @override
+  void initState() {
+    nameTextController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -27,15 +38,29 @@ class NameView extends ConsumerWidget {
           ),
         ),
         const Spacer(flex: 2),
-        const OogwayTextField(hintText: "Your nickname"),
+        OogwayTextField(
+          hintText: "Your nickname",
+          textEditingController: nameTextController,
+        ),
         const Spacer(flex: 4),
         OogwayLongButton(
           title: "Continue",
-          onTap: () async {
-            ref.read(onboardAcionControllerProvider).submitName();
+          onPressed: () async {
+            await ref
+                .read(onboardAcionControllerProvider)
+                .submitName(name: nameTextController.text);
           },
+          backgroundColor: OogwayColors.kPrimaryLightColor,
+          pressedColor: OogwayColors.kPrimaryLightColor,
+          childColor: OogwayColors.kPrimaryDarkColor,
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    nameTextController.dispose();
+    super.dispose();
   }
 }

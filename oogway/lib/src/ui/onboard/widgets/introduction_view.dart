@@ -37,10 +37,13 @@ class IntroductionView extends StatelessWidget {
         Consumer(
           builder: (context, ref, child) {
             return OogwayLongButton(
-              onTap: () {
+              onPressed: () {
                 ref.read(onboardAnimationControllerProvider).forwardAnimation();
                 ref.read(onboardFlowControllerProvider).nextPage();
               },
+              backgroundColor: OogwayColors.kPrimaryLightColor,
+              pressedColor: OogwayColors.kPrimaryLightColor,
+              childColor: OogwayColors.kPrimaryDarkColor,
               title: "Hi Oogway!",
             );
           },
