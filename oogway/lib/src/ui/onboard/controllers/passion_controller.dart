@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recase/recase.dart';
 
 class PassionSelectionController extends ChangeNotifier {
-  final List<Passion> _unselectedPassions = Passion.values.toList();
-  final List<Passion> _selectedPassions = [];
+  List<Passion> _unselectedPassions = Passion.values.toList();
+  List<Passion> _selectedPassions = [];
 
   List<Passion> get selectedPassions {
     // Returns an alphabetical list
@@ -43,6 +43,12 @@ class PassionSelectionController extends ChangeNotifier {
     }
     _selectedPassions.remove(value);
     _unselectedPassions.add(value);
+    notifyListeners();
+  }
+
+  void refresh() {
+    _unselectedPassions = Passion.values.toList();
+    _selectedPassions = [];
     notifyListeners();
   }
 }

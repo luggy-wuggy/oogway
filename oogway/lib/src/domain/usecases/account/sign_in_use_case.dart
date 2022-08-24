@@ -1,4 +1,5 @@
 import 'package:oogway/src/app_router.dart';
+import 'package:oogway/src/common/constants/secure_storage.dart';
 import 'package:oogway/src/data/data.dart';
 import 'package:oogway/src/models/user.dart';
 import 'package:riverpod/riverpod.dart';
@@ -15,6 +16,11 @@ class SignInUseCase {
     final fbUser = await auth.signInAnonymously();
     user.id = fbUser?.user?.uid;
     user.date = DateTime.now();
+
+    await SecureStorage.writeSecureData(
+      SecureStorage.accountUid,
+      fbUser?.user?.uid ?? "",
+    );
 
     await database.createNewUser(user);
     await router.login();

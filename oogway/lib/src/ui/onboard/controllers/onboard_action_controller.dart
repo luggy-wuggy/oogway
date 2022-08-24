@@ -27,14 +27,12 @@ class OnboardActionController extends ChangeNotifier with Logging {
   late final AddressSearchController addressSearchController =
       read(addressSearchControllerProvider);
 
-  // TODO: biz logic
   Future submitName({required String name}) async {
     user.name = name;
     logger.i("USER name submited as ${user.name}");
     onboardFlowController.nextPage();
   }
 
-  // TODO: biz logic
   void submitCity(PlaceDetail? place) {
     user.place?.placeID = place?.placeID;
     user.placeId = place?.placeID;
@@ -48,7 +46,6 @@ class OnboardActionController extends ChangeNotifier with Logging {
     onboardFlowController.nextPage();
   }
 
-  // TODO: biz logic
   void submitPassions() {
     user.passions = passionSelectionController.selectedPassions;
     logger.i("Passions submited as ${user.passions}");
@@ -57,6 +54,8 @@ class OnboardActionController extends ChangeNotifier with Logging {
   }
 
   void finishOnboard() async {
+    passionSelectionController.refresh();
+    addressSearchController.refresh();
     await signInUseCase.call(user);
   }
 }
