@@ -16,7 +16,8 @@ class CityView extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _CityViewState();
 }
 
-class _CityViewState extends ConsumerState<CityView> {
+class _CityViewState extends ConsumerState<CityView>
+    with AutomaticKeepAliveClientMixin {
   late final TextEditingController locationTextController;
 
   @override
@@ -27,8 +28,7 @@ class _CityViewState extends ConsumerState<CityView> {
 
   @override
   Widget build(BuildContext context) {
-    final onboardFlowController = ref.watch(onboardFlowControllerProvider);
-
+    super.build(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -87,6 +87,9 @@ class _CityViewState extends ConsumerState<CityView> {
     locationTextController.dispose();
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class _AddressBottomSheetContent extends ConsumerWidget {

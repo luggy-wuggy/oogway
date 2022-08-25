@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/constants/ui.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_action_controller.dart';
-import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 import 'package:oogway/src/ui/widgets/long_button.dart';
 import 'package:oogway/src/ui/widgets/text_field.dart';
 
@@ -13,7 +12,8 @@ class NameView extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _NameViewState();
 }
 
-class _NameViewState extends ConsumerState<NameView> {
+class _NameViewState extends ConsumerState<NameView>
+    with AutomaticKeepAliveClientMixin {
   late final TextEditingController nameTextController;
 
   @override
@@ -24,6 +24,7 @@ class _NameViewState extends ConsumerState<NameView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -63,4 +64,7 @@ class _NameViewState extends ConsumerState<NameView> {
     nameTextController.dispose();
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
