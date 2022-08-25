@@ -63,21 +63,21 @@ class RootView extends ConsumerWidget {
             label: "",
             icon: Icon(
               Icons.home_rounded,
-              color: Colors.white,
+              color: OogwayColors.kPrimaryLightColor,
             ),
           ),
           BottomNavigationBarItem(
             label: "",
             icon: Icon(
               Icons.search_rounded,
-              color: Colors.white,
+              color: OogwayColors.kPrimaryLightColor,
             ),
           ),
           BottomNavigationBarItem(
             label: "",
             icon: Icon(
-              Icons.settings,
-              color: Colors.white,
+              Icons.settings_rounded,
+              color: OogwayColors.kPrimaryLightColor,
             ),
           ),
         ],
