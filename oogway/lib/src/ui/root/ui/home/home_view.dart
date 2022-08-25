@@ -1,19 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:oogway/src/ui/root/ui/home/widgets/charity_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:oogway/src/ui/controllers/page_controller.dart';
+import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
+import 'package:oogway/src/ui/root/ui/home/controller/category_controller.dart';
 import 'package:oogway/src/ui/root/ui/home/widgets/charity_list.dart';
-import 'package:oogway/src/ui/root/ui/home/widgets/home_category_pills_list.dart';
+import 'package:oogway/src/ui/root/ui/home/widgets/home_category_list.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  late final PageController pageController;
+  late final List<Enum> flowTypeList;
+
+  @override
+  void initState() {
+    pageController = PageController(initialPage: 0);
+    flowTypeList = Passion.values;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        HomeCategoryList(),
-        SizedBox(height: 20),
-        HomeCharityList(),
+    return ProviderScope(
+      overrides: [
+        catgoryControllerProvider.overrideWithValue(CategoryFlowController(
+          pageController: pageController,
+          flowTypeList: flowTypeList,
+        )),
       ],
+      child: Column(
+        children: const [
+          HomeCategoryList(),
+          SizedBox(height: 20),
+          HomeCharityList(),
+        ],
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 }

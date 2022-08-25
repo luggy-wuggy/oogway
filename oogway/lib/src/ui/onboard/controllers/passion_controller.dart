@@ -24,7 +24,7 @@ class PassionSelectionController extends ChangeNotifier {
         return a.enumToString()[0].compareTo(b.enumToString()[0]);
       },
     );
-
+    _unselectedPassions.remove(Passion.forYou);
     return _unselectedPassions;
   }
 
@@ -59,15 +59,16 @@ final passionSelectionControllerProvider =
 });
 
 enum Passion {
+  forYou,
   animals,
   arts,
-  publicPolicy,
-  health,
-  education,
-  environment,
-  religion,
   civilRights,
   communityDevelopment,
+  education,
+  environment,
+  health,
+  religion,
+  publicPolicy,
 }
 
 extension ToString on Passion {

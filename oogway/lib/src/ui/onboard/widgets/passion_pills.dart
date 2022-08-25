@@ -3,11 +3,15 @@ import 'package:oogway/src/common/constants/ui.dart';
 
 class HomeCategoryPills extends StatelessWidget {
   const HomeCategoryPills(
-      {Key? key, required this.title, required this.isSelected})
+      {Key? key,
+      required this.title,
+      required this.isSelected,
+      required this.onTap})
       : super(key: key);
 
   final String title;
   final bool isSelected;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +26,9 @@ class HomeCategoryPills extends StatelessWidget {
       titleFontSize: 16,
       verticalPadding: 8,
       horizontalPadding: 16,
+      onTap: () {
+        onTap();
+      },
     );
   }
 }
