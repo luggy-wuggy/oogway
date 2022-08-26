@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:oogway/src/ui/controllers/page_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 import 'package:oogway/src/ui/root/ui/home/controller/category_controller.dart';
 import 'package:oogway/src/ui/root/ui/home/widgets/charity_list.dart';
@@ -34,10 +33,10 @@ class _HomeViewState extends State<HomeView> {
         )),
       ],
       child: Column(
-        children: const [
-          HomeCategoryList(),
-          SizedBox(height: 20),
-          HomeCharityList(),
+        children: [
+          const HomeCategoryList(),
+          const SizedBox(height: 20),
+          HomeCharityList(pageController: pageController),
         ],
       ),
     );

@@ -17,12 +17,6 @@ class HomeCategoryList extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          // HomeCategoryPills(
-          //   title: "For you",
-          //   isSelected: true,
-          //   onTap: () {},
-          // ),
-          // const SizedBox(width: 5),
           ...Passion.values.map(
             (e) => Padding(
               padding: const EdgeInsets.only(right: 5),
