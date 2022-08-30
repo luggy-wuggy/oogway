@@ -1,6 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:oogway/src/common/constants/ui.dart';
 
+class HomeCategoryPills extends StatelessWidget {
+  const HomeCategoryPills(
+      {Key? key,
+      required this.title,
+      required this.isSelected,
+      required this.onTap})
+      : super(key: key);
+
+  final String title;
+  final bool isSelected;
+  final Function onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return PassionPills(
+      title: title,
+      pillColor: isSelected
+          ? OogwayColors.kPrimaryLightColor
+          : OogwayColors.kPrimaryTransparentDarkColor,
+      textColor: isSelected
+          ? OogwayColors.kPrimaryDarkColor
+          : OogwayColors.kPrimaryLightColor,
+      titleFontSize: 16,
+      verticalPadding: 8,
+      horizontalPadding: 16,
+      onTap: () {
+        onTap();
+      },
+    );
+  }
+}
+
 class SelectedPassionPills extends StatelessWidget {
   const SelectedPassionPills({Key? key, required this.title, this.onTap})
       : super(key: key);
@@ -42,18 +74,24 @@ class NotSelectedPassionPills extends StatelessWidget {
 }
 
 class PassionPills extends StatelessWidget {
-  const PassionPills(
-      {Key? key,
-      this.onTap,
-      required this.title,
-      required this.pillColor,
-      required this.textColor})
-      : super(key: key);
+  const PassionPills({
+    Key? key,
+    this.onTap,
+    required this.title,
+    required this.pillColor,
+    required this.textColor,
+    this.horizontalPadding = 20,
+    this.verticalPadding = 10,
+    this.titleFontSize = 18,
+  }) : super(key: key);
 
   final String title;
+  final double titleFontSize;
   final Color pillColor;
   final Color textColor;
   final Function? onTap;
+  final double horizontalPadding;
+  final double verticalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +100,10 @@ class PassionPills extends StatelessWidget {
         onTap?.call();
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding,
+          vertical: verticalPadding,
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: pillColor,
@@ -70,7 +111,7 @@ class PassionPills extends StatelessWidget {
         child: Text(
           title,
           style: TextStyle(
-            fontSize: 18,
+            fontSize: titleFontSize,
             color: textColor,
           ),
         ),

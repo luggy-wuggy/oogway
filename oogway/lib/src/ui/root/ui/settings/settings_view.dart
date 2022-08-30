@@ -16,8 +16,8 @@ class SettingsView extends ConsumerWidget {
         backgroundColor: OogwayColors.kPrimaryLightColor,
         pressedColor: OogwayColors.kPrimaryLightColor,
         childColor: OogwayColors.kPrimaryDarkColor,
-        onPressed: () {
-          ref.read(signOutUseCaseProvider).call();
+        onPressed: () async {
+          await ref.read(signOutUseCaseProvider).call();
           ref.refresh(bottomNavIndexProvider);
         },
       ),

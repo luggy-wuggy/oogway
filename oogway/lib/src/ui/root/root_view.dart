@@ -5,6 +5,7 @@ import 'package:oogway/src/ui/root/controllers/index_controller.dart';
 import 'package:oogway/src/ui/root/ui/home/home_view.dart';
 import 'package:oogway/src/ui/root/ui/search/search_view.dart';
 import 'package:oogway/src/ui/root/ui/settings/settings_view.dart';
+import 'dart:math' as math; // import this
 
 class RootView extends ConsumerWidget {
   const RootView({Key? key}) : super(key: key);
@@ -29,10 +30,14 @@ class RootView extends ConsumerWidget {
                   fontSize: 30, color: OogwayColors.kPrimaryLightColor),
             ),
             const Spacer(),
-            Image.asset(
-              'assets/images/turtle.png',
-              height: 35,
-              width: 35,
+            Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(math.pi),
+              child: Image.asset(
+                'assets/images/turtle.png',
+                height: 35,
+                width: 35,
+              ),
             )
           ],
         ),
@@ -58,21 +63,21 @@ class RootView extends ConsumerWidget {
             label: "",
             icon: Icon(
               Icons.home_rounded,
-              color: Colors.white,
+              color: OogwayColors.kPrimaryLightColor,
             ),
           ),
           BottomNavigationBarItem(
             label: "",
             icon: Icon(
               Icons.search_rounded,
-              color: Colors.white,
+              color: OogwayColors.kPrimaryLightColor,
             ),
           ),
           BottomNavigationBarItem(
             label: "",
             icon: Icon(
-              Icons.settings,
-              color: Colors.white,
+              Icons.settings_rounded,
+              color: OogwayColors.kPrimaryLightColor,
             ),
           ),
         ],
