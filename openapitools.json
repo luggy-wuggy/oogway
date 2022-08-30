@@ -1,0 +1,19 @@
+{
+    "spaces": 2,
+    "generator-cli": {
+      "version": "5.4.0",
+      "generators": {
+        "seashell_api": {
+          "input-spec": "./openapi.yaml",
+          "generator-name": "dart-dio-next",
+          "output": "oogway_api",
+          "globalProperty": {
+            "skipFormModel": false
+          },
+          "additionalProperties": {
+            "pubName": "oogway_api"
+          }
+        }
+      }
+    }
+  }
