@@ -1,9 +1,10 @@
+import 'package:oogway_api/oogway_api.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/domain/usecases/usecases.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 import 'package:oogway/src/ui/root/ui/home/controller/category_controller.dart';
-import 'package:oogway/swagger_generated_code/charity_navigator.swagger.dart';
 
 import 'charity_card.dart';
 
@@ -34,7 +35,7 @@ class _CharityList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<List<OrganizationCollectionItem>?> charity =
+    AsyncValue<BuiltList<OrganizationCollectionItem>?> charity =
         ref.watch(forYouCharityProvider);
 
     return charity.when(loading: () {
@@ -68,7 +69,8 @@ class _CharityList extends ConsumerWidget {
 }
 
 final forYouCharityProvider =
-    FutureProvider.autoDispose<List<OrganizationCollectionItem>?>((ref) async {
+    FutureProvider.autoDispose<BuiltList<OrganizationCollectionItem>?>(
+        (ref) async {
   final getForCharityUseCase = ref.read(getOrganizationsUseCaseProvider);
 
   final list = await getForCharityUseCase.call();
