@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:oogway/src/common/constants/ui.dart';
+import 'package:oogway/src/common/extensions/charity.dart';
+import 'package:oogway/src/common/extensions/double.dart';
+import 'package:oogway/src/common/extensions/string.dart';
+import 'package:oogway/src/models/charity.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingCharityCard extends StatelessWidget {
@@ -101,7 +105,12 @@ class LoadingCharityCard extends StatelessWidget {
 }
 
 class CharityCard extends StatelessWidget {
-  const CharityCard({Key? key}) : super(key: key);
+  const CharityCard({
+    Key? key,
+    required this.charity,
+  }) : super(key: key);
+
+  final Charity charity;
 
   @override
   Widget build(BuildContext context) {
@@ -128,37 +137,41 @@ class CharityCard extends StatelessWidget {
                       color: OogwayColors.kPrimaryTransparentDarkColor,
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
-                    child: const Icon(
-                      Icons.palette,
+                    child: Icon(
+                      charity.charityIcon,
                       color: OogwayColors.kPrimaryLightColor,
                     ),
                   ),
                   const SizedBox(width: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "Redwood Food Empire",
-                        style: TextStyle(
-                          color: OogwayColors.kPrimaryLightColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          (charity.charityName ?? "").useCorrectEllipsis(),
+                          style: const TextStyle(
+                            color: OogwayColors.kPrimaryLightColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                      Text(
-                        "Santa Rosa, CA",
-                        style: TextStyle(
-                          color: OogwayColors.kPrimaryLightColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w300,
+                        Text(
+                          "${charity.mailingAddress?.city ?? ""}, ${charity.mailingAddress?.stateOrProvince ?? ""}",
+                          style: const TextStyle(
+                            color: OogwayColors.kPrimaryLightColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 10),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     height: 38,
@@ -168,9 +181,9 @@ class CharityCard extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
                     alignment: Alignment.center,
-                    child: const Text(
-                      "C-",
-                      style: TextStyle(
+                    child: Text(
+                      (charity.currentRating?.score ?? 0).convertToLetter,
+                      style: const TextStyle(
                         color: OogwayColors.kPrimaryLightColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -178,25 +191,28 @@ class CharityCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 15),
-                  const Flexible(
+                  Flexible(
                     child: Text(
-                      "We are volunteer organization that provides fresh and healthy meals for over 1,500 people in sonoma county every day.",
+                      charity.mission ?? "",
                       style: TextStyle(
-                        color: OogwayColors.kPrimaryLightColor,
+                        color: OogwayColors.kPrimaryLightColor.withOpacity(0.8),
                         fontSize: 11,
                         fontWeight: FontWeight.w300,
                       ),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
               ),
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Icon(
-                  Icons.favorite_border_rounded,
-                  color: OogwayColors.kPrimaryCoralColor,
-                ),
-              )
+              // const SizedBox(height: 4),
+              // const Align(
+              //   alignment: Alignment.centerRight,
+              //   child: Icon(
+              //     Icons.favorite_border_rounded,
+              //     color: OogwayColors.kPrimaryCoralColor,
+              //   ),
+              // )
             ],
           )),
     );

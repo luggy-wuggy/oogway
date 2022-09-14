@@ -1,32 +1,83 @@
-import 'package:oogway/src/app_providers.dart';
-import 'package:oogway/src/common/constants/charity_navigator.dart';
-import 'package:oogway/swagger_generated_code/charity_navigator.swagger.dart';
+import 'package:http/http.dart' as http;
+import 'package:oogway/src/models/charity.dart';
 import 'package:riverpod/riverpod.dart';
+import 'dart:developer';
 
 class CharityNavigatorFacade {
-  CharityNavigatorFacade({required this.api});
+  final client = http.Client();
 
-  final CharityNavigator api;
-
-  Future<List<OrganizationCollectionItem>?> fetchOrganizations() async {
-    try {
-      final response = await api.organizationsGet(
-        appId: CharityApiKeys.appId,
-        appKey: CharityApiKeys.appKey,
-      );
-
-      if (response.isSuccessful) {
-        return response.body;
-      }
-    } catch (e) {
-      rethrow;
+  Future<List<Charity>> fetchCharities() async {
+    var response = await client.get(CharityApiStrings.charityURI);
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return charityFromJson(jsonString);
+    } else {
+      //show error message
+      return [];
     }
-    return null;
+  }
+
+  Future<List<Charity>> fetchCharitiesByCategory(int i) async {
+    var response = await client.get(CharityApiStrings().uriByCategory(i)!);
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+
+      return charityFromJson(jsonString);
+    } else {
+      //show error message
+      return [];
+    }
+  }
+
+  Future<List<Charity>> fetchCharitiesBySearch(String s) async {
+    if (s != null) {
+      print(s);
+      var response = await client.get(CharityApiStrings().uriBySearch(s)!);
+      if (response.statusCode == 200) {
+        var jsonString = response.body;
+        print(jsonString);
+        return charityFromJson(jsonString);
+      } else {
+        //show error message
+        return [];
+      }
+    } else {
+      return [];
+    }
+  }
+}
+
+class CharityApiStrings {
+  static var charityURI = Uri.parse(
+      'https://api.data.charitynavigator.org/v2/Organizations?app_id=a71b11e3&app_key=14e84a0b33b1264879cf00974fe28b0c&rated=TRUE&pageSize=10');
+
+  Uri? uriByCategory(int i) {
+    try {
+      if (i >= 1 && i <= 11) {
+        return Uri.parse(
+            'https://api.data.charitynavigator.org/v2/Organizations?app_id=a71b11e3&app_key=14e84a0b33b1264879cf00974fe28b0c&rated=TRUE&pageSize=10&categoryID=$i');
+      } else if (i == 0) {
+        return charityURI;
+      } else {
+        return null;
+      }
+    } on Exception catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
+
+  Uri? uriBySearch(String s) {
+    try {
+      return Uri.parse(
+          'https://api.data.charitynavigator.org/v2/Organizations?app_id=a71b11e3&app_key=14e84a0b33b1264879cf00974fe28b0c&rated=TRUE&pageSize=10&search=$s&searchType=DEFAULT');
+    } on Exception catch (e) {
+      log(e.toString());
+      return null;
+    }
   }
 }
 
 final charityFacadeProvider = Provider<CharityNavigatorFacade>((ref) {
-  final charityNavigatorApi = ref.read(charityNavigatorApiProvider);
-
-  return CharityNavigatorFacade(api: charityNavigatorApi);
+  return CharityNavigatorFacade();
 });
