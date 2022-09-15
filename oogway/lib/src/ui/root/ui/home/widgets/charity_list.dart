@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:oogway/src/common/extensions/charity.dart';
 import 'package:oogway/src/domain/usecases/usecases.dart';
 import 'package:oogway/src/models/charity.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
@@ -64,16 +63,6 @@ class _CharityList extends ConsumerWidget {
             ],
           );
         },
-
-        // children: const [
-        //   CharityCard(),
-        //   SizedBox(height: 20),
-        //   CharityCard(),
-        //   SizedBox(height: 20),
-        //   CharityCard(),
-        //   SizedBox(height: 20),
-        //   CharityCard(),
-        // ],
       );
     });
   }
@@ -84,10 +73,6 @@ final forYouCharityProvider =
   final getForCharityUseCase = ref.read(getOrganizationsUseCaseProvider);
 
   final list = await getForCharityUseCase.call();
-
-  list.forEach((element) {
-    print(element.charityId);
-  });
 
   return list;
 });
