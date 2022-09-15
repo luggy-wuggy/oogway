@@ -1,5 +1,5 @@
-import 'package:oogway/src/data/data.dart';
-import 'package:oogway/swagger_generated_code/charity_navigator.swagger.dart';
+import 'package:oogway/src/data/facades/facades.dart';
+import 'package:oogway/src/models/charity.dart';
 import 'package:riverpod/riverpod.dart';
 
 class GetOrganizationsUseCase {
@@ -7,8 +7,9 @@ class GetOrganizationsUseCase {
 
   final CharityNavigatorFacade charityFacade;
 
-  Future<List<OrganizationCollectionItem>?> call() async {
-    return await charityFacade.fetchOrganizations();
+  Future<List<Charity>> call() async {
+    final result = charityFacade.fetchCharities();
+    return result;
   }
 }
 

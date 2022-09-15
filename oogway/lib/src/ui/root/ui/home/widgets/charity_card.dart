@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:oogway/src/common/constants/ui.dart';
+import 'package:oogway/src/common/extensions/charity.dart';
+import 'package:oogway/src/common/extensions/double.dart';
+import 'package:oogway/src/common/extensions/string.dart';
+import 'package:oogway/src/models/charity.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingCharityCard extends StatelessWidget {
@@ -101,104 +105,132 @@ class LoadingCharityCard extends StatelessWidget {
 }
 
 class CharityCard extends StatelessWidget {
-  const CharityCard({Key? key}) : super(key: key);
+  const CharityCard({
+    Key? key,
+    required this.charity,
+  }) : super(key: key);
+
+  final Charity charity;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: OogwayColors.kPrimaryTransparentDarkColor,
-              width: 3,
-            ),
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: OogwayColors.kPrimaryTransparentDarkColor,
+                  width: 3,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+              ),
+              child: Column(
                 children: [
-                  Container(
-                    height: 38,
-                    width: 38,
-                    decoration: const BoxDecoration(
-                      color: OogwayColors.kPrimaryTransparentDarkColor,
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    child: const Icon(
-                      Icons.palette,
-                      color: OogwayColors.kPrimaryLightColor,
-                    ),
-                  ),
-                  const SizedBox(width: 15),
-                  Column(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "Redwood Food Empire",
-                        style: TextStyle(
+                    children: [
+                      Container(
+                        height: 38,
+                        width: 38,
+                        decoration: const BoxDecoration(
+                          color: OogwayColors.kPrimaryTransparentDarkColor,
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                        ),
+                        child: Icon(
+                          charity.charityIcon,
                           color: OogwayColors.kPrimaryLightColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text(
-                        "Santa Rosa, CA",
-                        style: TextStyle(
-                          color: OogwayColors.kPrimaryLightColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w300,
+                      const SizedBox(width: 15),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              (charity.charityName ?? "").useCorrectEllipsis(),
+                              style: const TextStyle(
+                                color: OogwayColors.kPrimaryLightColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              "${charity.mailingAddress?.city ?? ""}, ${charity.mailingAddress?.stateOrProvince ?? ""}",
+                              style: const TextStyle(
+                                color: OogwayColors.kPrimaryLightColor,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  Container(
-                    height: 38,
-                    width: 38,
-                    decoration: const BoxDecoration(
-                      color: OogwayColors.kPrimaryTransparentDarkColor,
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "C-",
-                      style: TextStyle(
-                        color: OogwayColors.kPrimaryLightColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 24.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 38,
+                          width: 38,
+                          decoration: const BoxDecoration(
+                            color: OogwayColors.kPrimaryTransparentDarkColor,
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            (charity.currentRating?.score ?? 0).convertToLetter,
+                            style: const TextStyle(
+                              color: OogwayColors.kPrimaryLightColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 15),
+                        Flexible(
+                          child: Text(
+                            charity.mission ?? "",
+                            style: TextStyle(
+                              color: OogwayColors.kPrimaryLightColor
+                                  .withOpacity(0.8),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w300,
+                            ),
+                            maxLines: 4,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(width: 15),
-                  const Flexible(
-                    child: Text(
-                      "We are volunteer organization that provides fresh and healthy meals for over 1,500 people in sonoma county every day.",
-                      style: TextStyle(
-                        color: OogwayColors.kPrimaryLightColor,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ),
+                  // const SizedBox(height: 4),
+                  // const Align(
+                  //   alignment: Alignment.centerRight,
+                  //   child: Icon(
+                  //     Icons.favorite_border_rounded,
+                  //     color: OogwayColors.kPrimaryCoralColor,
+                  //   ),
+                  // )
                 ],
-              ),
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Icon(
-                  Icons.favorite_border_rounded,
-                  color: OogwayColors.kPrimaryCoralColor,
-                ),
-              )
-            ],
-          )),
+              )),
+        ),
+        const Positioned(
+          bottom: 16,
+          right: 40,
+          child: Icon(
+            Icons.favorite_border_rounded,
+            color: OogwayColors.kPrimaryCoralColor,
+          ),
+        )
+      ],
     );
   }
 }

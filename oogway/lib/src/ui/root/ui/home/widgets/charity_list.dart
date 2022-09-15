@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/domain/usecases/usecases.dart';
+import 'package:oogway/src/models/charity.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 import 'package:oogway/src/ui/root/ui/home/controller/category_controller.dart';
-import 'package:oogway/swagger_generated_code/charity_navigator.swagger.dart';
 
 import 'charity_card.dart';
 
@@ -34,8 +34,7 @@ class _CharityList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<List<OrganizationCollectionItem>?> charity =
-        ref.watch(forYouCharityProvider);
+    AsyncValue<List<Charity>?> charity = ref.watch(forYouCharityProvider);
 
     return charity.when(loading: () {
       return ListView(
@@ -52,23 +51,25 @@ class _CharityList extends ConsumerWidget {
     }, error: (error, stackTrace) {
       return const SizedBox.shrink();
     }, data: (data) {
-      return ListView(
-        children: const [
-          CharityCard(),
-          SizedBox(height: 20),
-          CharityCard(),
-          SizedBox(height: 20),
-          CharityCard(),
-          SizedBox(height: 20),
-          CharityCard(),
-        ],
+      return ListView.builder(
+        itemCount: data?.length,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              CharityCard(
+                charity: data![index],
+              ),
+              const SizedBox(height: 20),
+            ],
+          );
+        },
       );
     });
   }
 }
 
 final forYouCharityProvider =
-    FutureProvider.autoDispose<List<OrganizationCollectionItem>?>((ref) async {
+    FutureProvider.autoDispose<List<Charity>?>((ref) async {
   final getForCharityUseCase = ref.read(getOrganizationsUseCaseProvider);
 
   final list = await getForCharityUseCase.call();
