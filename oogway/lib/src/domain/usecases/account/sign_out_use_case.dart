@@ -4,12 +4,13 @@ import 'package:oogway/src/data/data.dart';
 import 'package:riverpod/riverpod.dart';
 
 class SignOutUseCase {
-  SignOutUseCase({required this.read});
+  SignOutUseCase({required this.ref});
 
-  final Reader read;
+//final Reader read;
+  final Ref ref;
 
-  late final AuthenticationFacade auth = read(authenticationFacadeProvider);
-  late final OogwayRouter router = read(oogwayRouterProvider);
+  late final AuthenticationFacade auth = ref.read(authenticationFacadeProvider);
+  late final OogwayRouter router = ref.read(oogwayRouterProvider);
 
   Future<void> call() async {
     await SecureStorage.deleteAllSecureData();
@@ -20,6 +21,6 @@ class SignOutUseCase {
 
 final signOutUseCaseProvider = Provider<SignOutUseCase>((ref) {
   return SignOutUseCase(
-    read: ref.read,
+    ref: ref,
   );
 });

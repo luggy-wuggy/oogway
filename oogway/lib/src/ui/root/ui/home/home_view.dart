@@ -27,9 +27,14 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return ProviderScope(
       overrides: [
-        catgoryControllerProvider.overrideWithValue(CategoryFlowController(
-          pageController: pageController,
-          flowTypeList: flowTypeList,
+        catgoryControllerProvider.overrideWithProvider(
+            ChangeNotifierProvider.autoDispose<CategoryFlowController>(
+          (ref) {
+            return CategoryFlowController(
+              pageController: pageController,
+              flowTypeList: flowTypeList,
+            );
+          },
         )),
       ],
       child: Column(
@@ -44,7 +49,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   void dispose() {
-    pageController.dispose();
     super.dispose();
   }
 }

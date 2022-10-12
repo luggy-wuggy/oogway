@@ -5,7 +5,7 @@ import 'package:oogway/src/ui/controllers/page_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_action_controller.dart';
 
 final catgoryControllerProvider =
-    ChangeNotifierProvider<CategoryFlowController>((ref) {
+    ChangeNotifierProvider.autoDispose<CategoryFlowController>((ref) {
   throw UnimplementedError;
 }, dependencies: [
   onboardAcionControllerProvider,

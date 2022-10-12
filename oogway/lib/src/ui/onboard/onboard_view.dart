@@ -46,10 +46,14 @@ class _OnboardViewState extends ConsumerState<OnboardView>
   Widget build(BuildContext context) {
     return ProviderScope(
       overrides: [
-        onboardFlowControllerProvider.overrideWithValue(
-          FlowController(
-            pageController: pageController,
-            flowTypeList: flowTypeList,
+        onboardFlowControllerProvider.overrideWithProvider(
+          ChangeNotifierProvider.autoDispose<FlowController>(
+            (ref) {
+              return FlowController(
+                pageController: pageController,
+                flowTypeList: flowTypeList,
+              );
+            },
           ),
         ),
         onboardAnimationControllerProvider
@@ -62,7 +66,6 @@ class _OnboardViewState extends ConsumerState<OnboardView>
 
   @override
   void dispose() {
-    pageController.dispose();
     animationController.dispose();
     super.dispose();
   }

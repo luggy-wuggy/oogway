@@ -11,21 +11,21 @@ import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 
 class OnboardActionController extends ChangeNotifier with Logging {
-  final Reader read;
+  final Ref ref;
 
-  OnboardActionController({required this.read});
+  OnboardActionController({required this.ref});
 
   final OogwayUser user = OogwayUser();
 
-  late final SignInUseCase signInUseCase = read(signInUseCaseProvider);
+  late final SignInUseCase signInUseCase = ref.read(signInUseCaseProvider);
   late final FlowController onboardFlowController =
-      read(onboardFlowControllerProvider);
+      ref.read(onboardFlowControllerProvider);
 
   late final PassionSelectionController passionSelectionController =
-      read(passionSelectionControllerProvider);
+      ref.read(passionSelectionControllerProvider);
 
   late final AddressSearchController addressSearchController =
-      read(addressSearchControllerProvider);
+      ref.read(addressSearchControllerProvider);
 
   Future submitName({required String name}) async {
     user.name = name;
@@ -63,6 +63,6 @@ class OnboardActionController extends ChangeNotifier with Logging {
 final onboardAcionControllerProvider =
     ChangeNotifierProvider<OnboardActionController>(
   (ref) {
-    return OnboardActionController(read: ref.read);
+    return OnboardActionController(ref: ref);
   },
 );
