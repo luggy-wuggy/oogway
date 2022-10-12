@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:recase/recase.dart';
+import 'package:oogway/src/common/extensions/string.dart';
 
 class PassionSelectionController extends ChangeNotifier {
   List<Passion> _unselectedPassions = Passion.values.toList();
@@ -69,19 +69,4 @@ enum Passion {
   health,
   religion,
   publicPolicy,
-}
-
-extension ToString on Passion {
-  String enumToString() {
-    return toString().split('Passion.')[1].sentenceCase.toTitleCase();
-  }
-}
-
-extension StringCasingExtension on String {
-  String toCapitalized() =>
-      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
-  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
-      .split(' ')
-      .map((str) => str.toCapitalized())
-      .join(' ');
 }

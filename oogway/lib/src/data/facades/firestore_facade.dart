@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:oogway/src/common/extensions/logger.dart';
+import 'package:oogway/src/common/extensions/string.dart';
 import 'package:oogway/src/models/user.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 import 'package:riverpod/riverpod.dart';

@@ -1,16 +1,23 @@
+import 'package:flutter/foundation.dart';
 import 'package:riverpod/riverpod.dart';
 
-class BottomNavIndexNotifier extends StateNotifier<int> {
-  BottomNavIndexNotifier({required this.initialIndex}) : super(initialIndex);
+class BottomNavIndexNotifier extends StateNotifier<RootPages> {
+  BottomNavIndexNotifier({required this.page}) : super(page);
 
-  final int initialIndex;
+  final RootPages page;
 
   void onTap(int value) {
-    state = value;
+    state = RootPages.values[value];
   }
 }
 
 final bottomNavIndexProvider =
-    StateNotifierProvider<BottomNavIndexNotifier, int>((ref) {
-  return BottomNavIndexNotifier(initialIndex: 0);
+    StateNotifierProvider<BottomNavIndexNotifier, RootPages>((ref) {
+  return BottomNavIndexNotifier(page: RootPages.home);
 });
+
+enum RootPages {
+  home,
+  search,
+  settings,
+}
