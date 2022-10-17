@@ -38,10 +38,10 @@ class _HomeViewState extends State<HomeView> {
         )),
       ],
       child: Column(
-        children: [
-          const HomeCategoryList(),
-          const SizedBox(height: 20),
-          HomeCharityList(pageController: pageController),
+        children: const [
+          HomeCategoryList(),
+          SizedBox(height: 20),
+          HomeCharityList(),
         ],
       ),
     );

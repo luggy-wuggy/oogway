@@ -10,20 +10,21 @@ import 'charity_card.dart';
 class HomeCharityList extends ConsumerWidget {
   const HomeCharityList({
     Key? key,
-    required this.pageController,
   }) : super(key: key);
-
-  final PageController pageController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final categoryController = ref.watch(catgoryControllerProvider);
+
     return Expanded(
       child: PageView(
-        controller: pageController,
+        controller: categoryController.pageController,
         onPageChanged: (int i) {
           ref.read(catgoryControllerProvider).swipeCategory(Passion.values[i]);
         },
-        children: Passion.values.map((e) => const _CharityList()).toList(),
+        children: categoryController.flowTypeList
+            .map((e) => const _CharityList())
+            .toList(),
       ),
     );
   }

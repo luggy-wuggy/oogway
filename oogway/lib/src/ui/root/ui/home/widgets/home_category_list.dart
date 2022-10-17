@@ -18,7 +18,7 @@ class HomeCategoryList extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          ...Passion.values.map(
+          ...categoryController.flowTypeList.map(
             (e) => Padding(
               padding: const EdgeInsets.only(right: 5),
               child: HomeCategoryPills(
