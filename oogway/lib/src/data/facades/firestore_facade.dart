@@ -98,6 +98,7 @@ class OogwayFirestoreDatabase with Logging {
           .collection("location")
           .doc()
           .get();
+
       return OogwayUser.fromDocumentSnapshot(doc, locDoc);
     } catch (e) {
       print(e);

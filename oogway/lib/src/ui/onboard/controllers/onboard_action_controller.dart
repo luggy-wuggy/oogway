@@ -5,6 +5,7 @@ import 'package:oogway/src/common/extensions/logger.dart';
 import 'package:oogway/src/domain/usecases/usecases.dart';
 import 'package:oogway/src/models/google_places.dart';
 import 'package:oogway/src/models/user.dart';
+import 'package:oogway/src/ui/controllers/account_info_controller.dart';
 import 'package:oogway/src/ui/controllers/page_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/address_search_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
@@ -35,7 +36,6 @@ class OnboardActionController extends ChangeNotifier with Logging {
 
   void submitCity(PlaceDetail? place) {
     user.place?.placeID = place?.placeID;
-    user.placeId = place?.placeID;
     user.place?.city = place?.locality;
     user.place?.state = place?.administrativeAreaLevel1;
     user.place?.street = place?.route;

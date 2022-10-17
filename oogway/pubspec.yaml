@@ -33,6 +33,7 @@ dependencies:
   flutter_secure_storage: ^6.0.0
   after_layout: ^1.2.0
   shimmer: ^2.0.0
+  enum_to_string: ^2.0.1
 
 dev_dependencies:
   flutter_test:

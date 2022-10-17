@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:oogway/src/models/place.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 
@@ -12,16 +13,22 @@ class OogwayUser {
 
   OogwayUser({this.id, this.date, this.passions});
 
+  /// Used to decode Firestore document snapshot to an Oogway User user.
   OogwayUser.fromDocumentSnapshot(
       DocumentSnapshot doc, DocumentSnapshot locDoc) {
+    // Convert List<String> to List<Passion>
+    List<Passion> passionList = List.from(doc['passions'])
+        .map((e) => EnumToString.fromString(Passion.values, e.camelCase)!)
+        .toList();
+
     id = doc.id;
-    date = doc['date'];
+    date = doc['date'].toDate();
     name = doc['name'];
-    passions = List.from(doc['passions']);
-    place?.city = locDoc["city"];
-    place?.state = locDoc["state"];
-    place?.street = locDoc["street"];
-    place?.streetNumber = locDoc["streetNumber"];
-    place?.zipCode = locDoc["zipCode"];
+    passions = passionList;
+    // place?.city = locDoc[0]["city"];
+    // place?.state = locDoc[0]["state"];
+    // place?.street = locDoc[0]["street"];
+    // place?.streetNumber = locDoc[0]["streetNumber"];
+    // place?.zipCode = locDoc[0]["zipCode"];
   }
 }
