@@ -7,8 +7,8 @@ class GetOrganizationsUseCase {
 
   final CharityNavigatorFacade charityFacade;
 
-  Future<List<Charity>> call() async {
-    final result = charityFacade.fetchCharities();
+  Future<List<Charity>> call(int categoryIndex) async {
+    final result = charityFacade.fetchCharitiesByCategory(categoryIndex);
     return result;
   }
 }
@@ -16,5 +16,6 @@ class GetOrganizationsUseCase {
 final getOrganizationsUseCaseProvider =
     Provider<GetOrganizationsUseCase>((ref) {
   return GetOrganizationsUseCase(
-      charityFacade: ref.read(charityFacadeProvider));
+    charityFacade: ref.read(charityFacadeProvider),
+  );
 });

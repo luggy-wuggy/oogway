@@ -25,7 +25,7 @@ class HomeCharityList extends ConsumerWidget {
               .swipeCategory(categoryController.flowTypeList[i]);
         },
         children: categoryController.flowTypeList
-            .map((e) => const _CharityList())
+            .map((passion) => _CharityList(passion: passion))
             .toList(),
       ),
     );
@@ -33,11 +33,14 @@ class HomeCharityList extends ConsumerWidget {
 }
 
 class _CharityList extends ConsumerWidget {
-  const _CharityList({Key? key}) : super(key: key);
+  const _CharityList({required this.passion, Key? key}) : super(key: key);
+
+  final Passion passion;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<List<Charity>?> charity = ref.watch(forYouCharityProvider);
+    AsyncValue<List<Charity>?> charity =
+        ref.watch(forYouCharityProvider(passion.index));
 
     return charity.when(loading: () {
       return ListView(
@@ -72,10 +75,10 @@ class _CharityList extends ConsumerWidget {
 }
 
 final forYouCharityProvider =
-    FutureProvider.autoDispose<List<Charity>?>((ref) async {
+    FutureProvider.family<List<Charity>?, int>((ref, categoryIndex) async {
   final getForCharityUseCase = ref.read(getOrganizationsUseCaseProvider);
 
-  final list = await getForCharityUseCase.call();
+  final list = await getForCharityUseCase.call(categoryIndex);
 
   return list;
 });

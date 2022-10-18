@@ -11,25 +11,29 @@ class HomeCategoryList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final categoryController = ref.watch(categoryControllerProvider);
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.only(left: 24, right: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          ...categoryController.flowTypeList.map(
-            (e) => Padding(
-              padding: const EdgeInsets.only(right: 5),
-              child: HomeCategoryPills(
-                title: e.enumToString(),
-                isSelected: e == categoryController.currentPage,
-                onTap: () {
-                  ref.read(categoryControllerProvider).selectCategory(e);
-                },
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.only(left: 24, right: 24),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            ...categoryController.flowTypeList.map(
+              (e) => Padding(
+                padding: const EdgeInsets.only(right: 5),
+                child: HomeCategoryPills(
+                  title: e.enumToString(),
+                  isSelected: e == categoryController.currentPage,
+                  onTap: () {
+                    ref.read(categoryControllerProvider).selectCategory(e);
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

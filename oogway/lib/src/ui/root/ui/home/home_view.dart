@@ -31,15 +31,16 @@ class _HomeViewState extends ConsumerState<HomeView> {
           return ProviderScope(
             overrides: [
               categoryControllerProvider.overrideWithProvider(
-                  ChangeNotifierProvider.autoDispose<CategoryFlowController>(
-                (ref) {
-                  return CategoryFlowController(
-                    ref: ref,
-                    pageController: pageController,
-                    flowTypeList: data.passions,
-                  );
-                },
-              )),
+                ChangeNotifierProvider.autoDispose<CategoryFlowController>(
+                  (ref) {
+                    return CategoryFlowController(
+                      ref: ref,
+                      pageController: pageController,
+                      flowTypeList: [Passion.forYou] + data.passions,
+                    );
+                  },
+                ),
+              ),
             ],
             child: Column(
               children: const [
@@ -54,10 +55,5 @@ class _HomeViewState extends ConsumerState<HomeView> {
           return const Text('error');
         }),
         loading: () => const CircularProgressIndicator());
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
