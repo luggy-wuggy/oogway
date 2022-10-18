@@ -14,13 +14,15 @@ class HomeCharityList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoryController = ref.watch(catgoryControllerProvider);
+    final categoryController = ref.watch(categoryControllerProvider);
 
     return Expanded(
       child: PageView(
         controller: categoryController.pageController,
         onPageChanged: (int i) {
-          ref.read(catgoryControllerProvider).swipeCategory(Passion.values[i]);
+          ref
+              .read(categoryControllerProvider)
+              .swipeCategory(categoryController.flowTypeList[i]);
         },
         children: categoryController.flowTypeList
             .map((e) => const _CharityList())

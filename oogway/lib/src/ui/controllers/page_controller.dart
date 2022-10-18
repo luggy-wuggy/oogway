@@ -6,43 +6,40 @@ class FlowController<T extends Enum> extends ChangeNotifier {
   FlowController({
     required this.pageController,
     required this.flowTypeList,
-  }) : _currentPage = flowTypeList.first;
+  }) : currentPage = flowTypeList.first;
   final PageController pageController;
   final List<T> flowTypeList;
-  T _currentPage;
+  T currentPage;
 
-  T get currentPage => _currentPage;
-  int get currentIndex => flowTypeList.indexOf(_currentPage);
-
-  double get progressPercentage => (currentIndex + 1) / flowTypeList.length;
+  int get currentIndex => flowTypeList.indexOf(currentPage);
 
   Future closeFlow() async {
     pageController.jumpToPage(0);
-    _currentPage = flowTypeList.first;
+    currentPage = flowTypeList.first;
     notifyListeners();
   }
 
   Future nextPage() async {
-    if (_currentPage == flowTypeList.last) {
+    if (currentPage == flowTypeList.last) {
       return;
     }
     pageController.nextPage(
       duration: const Duration(milliseconds: 970),
       curve: Curves.easeInOutCubicEmphasized,
     );
-    _currentPage = flowTypeList[currentIndex + 1];
+    currentPage = flowTypeList[currentIndex + 1];
     notifyListeners();
   }
 
   Future previousPage() async {
-    if (_currentPage == flowTypeList.first) {
+    if (currentPage == flowTypeList.first) {
       return;
     }
     pageController.previousPage(
       duration: const Duration(milliseconds: 970),
       curve: Curves.easeInOutCubicEmphasized,
     );
-    _currentPage = flowTypeList[currentIndex - 1];
+    currentPage = flowTypeList[currentIndex - 1];
     notifyListeners();
   }
 

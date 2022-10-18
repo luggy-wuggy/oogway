@@ -15,7 +15,7 @@ class OogwayFirestoreDatabase with Logging {
       await _database.collection('users').doc(user.id).set({
         "date": user.date,
         "name": user.name,
-        "passions": user.passions?.map((Passion e) {
+        "passions": user.passions.map((Passion e) {
           return e.enumToString();
         }).toList(),
       });

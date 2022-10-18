@@ -3,48 +3,52 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:oogway/src/ui/controllers/page_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_action_controller.dart';
+import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 
-final catgoryControllerProvider =
+final categoryControllerProvider =
     ChangeNotifierProvider.autoDispose<CategoryFlowController>((ref) {
   throw UnimplementedError;
 }, dependencies: [
   onboardAcionControllerProvider,
 ]);
 
-class CategoryFlowController extends FlowController {
+class CategoryFlowController extends FlowController<Passion> {
   CategoryFlowController({
     required super.pageController,
     required super.flowTypeList,
-  }) : _selectedCategory = flowTypeList[pageController.initialPage];
+    required this.ref,
+  });
 
-  late Enum _selectedCategory;
+  final Ref ref;
 
-  Enum get selectedCategory => _selectedCategory;
-
-  void selectCategory(Enum i) {
-    if (_selectedCategory == i) {
+  void selectCategory(Passion selectedCategory) {
+    if (currentPage == selectedCategory) {
       return;
     }
-    if (i.index + 1 == _selectedCategory.index ||
-        i.index - 1 == _selectedCategory.index) {
+
+    final indexSelectedCategory = flowTypeList.indexOf(selectedCategory);
+    final indexCurrentCategory = flowTypeList.indexOf(currentPage);
+
+    if (indexSelectedCategory + 1 == indexCurrentCategory ||
+        indexSelectedCategory - 1 == indexCurrentCategory) {
       pageController.animateToPage(
-        i.index,
+        indexSelectedCategory,
         duration: const Duration(milliseconds: 970),
         curve: Curves.easeInOutCubicEmphasized,
       );
     } else {
-      pageController.jumpToPage(i.index);
+      pageController.jumpToPage(indexSelectedCategory);
     }
 
-    _selectedCategory = i;
+    currentPage = selectedCategory;
     notifyListeners();
   }
 
-  void swipeCategory(Enum i) {
-    if (_selectedCategory == i) {
+  void swipeCategory(Passion selectedCategory) {
+    if (currentPage == selectedCategory) {
       return;
     }
-    _selectedCategory = i;
+    currentPage = selectedCategory;
     notifyListeners();
   }
 }

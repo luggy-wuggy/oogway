@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/extensions/string.dart';
-import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 import 'package:oogway/src/ui/onboard/widgets/passion_pills.dart';
 import 'package:oogway/src/ui/root/ui/home/controller/category_controller.dart';
 
@@ -10,7 +9,7 @@ class HomeCategoryList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoryController = ref.watch(catgoryControllerProvider);
+    final categoryController = ref.watch(categoryControllerProvider);
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -23,9 +22,9 @@ class HomeCategoryList extends ConsumerWidget {
               padding: const EdgeInsets.only(right: 5),
               child: HomeCategoryPills(
                 title: e.enumToString(),
-                isSelected: e == categoryController.selectedCategory,
+                isSelected: e == categoryController.currentPage,
                 onTap: () {
-                  ref.read(catgoryControllerProvider).selectCategory(e);
+                  ref.read(categoryControllerProvider).selectCategory(e);
                 },
               ),
             ),

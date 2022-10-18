@@ -17,7 +17,7 @@ class AccountInfoNotifier extends StateNotifier<AsyncValue<OogwayUser>> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final uuid = await SecureStorage.readSecureData(SecureStorage.accountUid);
-      final user = ref.read(firestoreDatabaseProvider).getUser(uuid!);
+      final user = await ref.read(firestoreDatabaseProvider).getUser(uuid!);
 
       return user;
     });
