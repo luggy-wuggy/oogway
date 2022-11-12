@@ -7,9 +7,9 @@ part of 'charity.dart';
 // **************************************************************************
 
 _$_Charity _$$_CharityFromJson(Map<String, dynamic> json) => _$_Charity(
-      charityNavigatorUrl: json['charityNavigatorUrl'] as String?,
+      charityNavigatorURL: json['charityNavigatorURL'] as String?,
       mission: json['mission'] as String?,
-      websiteUrl: json['websiteUrl'] as String?,
+      websiteURL: json['websiteURL'] as String?,
       tagLine: json['tagLine'] as String?,
       charityName: json['charityName'] as String?,
       ein: json['ein'] as String?,
@@ -43,9 +43,9 @@ _$_Charity _$$_CharityFromJson(Map<String, dynamic> json) => _$_Charity(
 
 Map<String, dynamic> _$$_CharityToJson(_$_Charity instance) =>
     <String, dynamic>{
-      'charityNavigatorUrl': instance.charityNavigatorUrl,
+      'charityNavigatorURL': instance.charityNavigatorURL,
       'mission': instance.mission,
-      'websiteUrl': instance.websiteUrl,
+      'websiteURL': instance.websiteURL,
       'tagLine': instance.tagLine,
       'charityName': instance.charityName,
       'ein': instance.ein,

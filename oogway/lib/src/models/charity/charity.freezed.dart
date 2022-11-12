@@ -20,9 +20,9 @@ Charity _$CharityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Charity {
-  String? get charityNavigatorUrl => throw _privateConstructorUsedError;
+  String? get charityNavigatorURL => throw _privateConstructorUsedError;
   String? get mission => throw _privateConstructorUsedError;
-  String? get websiteUrl => throw _privateConstructorUsedError;
+  String? get websiteURL => throw _privateConstructorUsedError;
   String? get tagLine => throw _privateConstructorUsedError;
   String? get charityName => throw _privateConstructorUsedError;
   String? get ein => throw _privateConstructorUsedError;
@@ -47,9 +47,9 @@ abstract class $CharityCopyWith<$Res> {
       _$CharityCopyWithImpl<$Res, Charity>;
   @useResult
   $Res call(
-      {String? charityNavigatorUrl,
+      {String? charityNavigatorURL,
       String? mission,
-      String? websiteUrl,
+      String? websiteURL,
       String? tagLine,
       String? charityName,
       String? ein,
@@ -85,9 +85,9 @@ class _$CharityCopyWithImpl<$Res, $Val extends Charity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? charityNavigatorUrl = freezed,
+    Object? charityNavigatorURL = freezed,
     Object? mission = freezed,
-    Object? websiteUrl = freezed,
+    Object? websiteURL = freezed,
     Object? tagLine = freezed,
     Object? charityName = freezed,
     Object? ein = freezed,
@@ -101,17 +101,17 @@ class _$CharityCopyWithImpl<$Res, $Val extends Charity>
     Object? organization = freezed,
   }) {
     return _then(_value.copyWith(
-      charityNavigatorUrl: freezed == charityNavigatorUrl
-          ? _value.charityNavigatorUrl
-          : charityNavigatorUrl // ignore: cast_nullable_to_non_nullable
+      charityNavigatorURL: freezed == charityNavigatorURL
+          ? _value.charityNavigatorURL
+          : charityNavigatorURL // ignore: cast_nullable_to_non_nullable
               as String?,
       mission: freezed == mission
           ? _value.mission
           : mission // ignore: cast_nullable_to_non_nullable
               as String?,
-      websiteUrl: freezed == websiteUrl
-          ? _value.websiteUrl
-          : websiteUrl // ignore: cast_nullable_to_non_nullable
+      websiteURL: freezed == websiteURL
+          ? _value.websiteURL
+          : websiteURL // ignore: cast_nullable_to_non_nullable
               as String?,
       tagLine: freezed == tagLine
           ? _value.tagLine
@@ -265,9 +265,9 @@ abstract class _$$_CharityCopyWith<$Res> implements $CharityCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? charityNavigatorUrl,
+      {String? charityNavigatorURL,
       String? mission,
-      String? websiteUrl,
+      String? websiteURL,
       String? tagLine,
       String? charityName,
       String? ein,
@@ -308,9 +308,9 @@ class __$$_CharityCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? charityNavigatorUrl = freezed,
+    Object? charityNavigatorURL = freezed,
     Object? mission = freezed,
-    Object? websiteUrl = freezed,
+    Object? websiteURL = freezed,
     Object? tagLine = freezed,
     Object? charityName = freezed,
     Object? ein = freezed,
@@ -324,17 +324,17 @@ class __$$_CharityCopyWithImpl<$Res>
     Object? organization = freezed,
   }) {
     return _then(_$_Charity(
-      charityNavigatorUrl: freezed == charityNavigatorUrl
-          ? _value.charityNavigatorUrl
-          : charityNavigatorUrl // ignore: cast_nullable_to_non_nullable
+      charityNavigatorURL: freezed == charityNavigatorURL
+          ? _value.charityNavigatorURL
+          : charityNavigatorURL // ignore: cast_nullable_to_non_nullable
               as String?,
       mission: freezed == mission
           ? _value.mission
           : mission // ignore: cast_nullable_to_non_nullable
               as String?,
-      websiteUrl: freezed == websiteUrl
-          ? _value.websiteUrl
-          : websiteUrl // ignore: cast_nullable_to_non_nullable
+      websiteURL: freezed == websiteURL
+          ? _value.websiteURL
+          : websiteURL // ignore: cast_nullable_to_non_nullable
               as String?,
       tagLine: freezed == tagLine
           ? _value.tagLine
@@ -388,9 +388,9 @@ class __$$_CharityCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Charity implements _Charity {
   _$_Charity(
-      {this.charityNavigatorUrl,
+      {this.charityNavigatorURL,
       this.mission,
-      this.websiteUrl,
+      this.websiteURL,
       this.tagLine,
       this.charityName,
       this.ein,
@@ -407,11 +407,11 @@ class _$_Charity implements _Charity {
       _$$_CharityFromJson(json);
 
   @override
-  final String? charityNavigatorUrl;
+  final String? charityNavigatorURL;
   @override
   final String? mission;
   @override
-  final String? websiteUrl;
+  final String? websiteURL;
   @override
   final String? tagLine;
   @override
@@ -437,7 +437,7 @@ class _$_Charity implements _Charity {
 
   @override
   String toString() {
-    return 'Charity(charityNavigatorUrl: $charityNavigatorUrl, mission: $mission, websiteUrl: $websiteUrl, tagLine: $tagLine, charityName: $charityName, ein: $ein, currentRating: $currentRating, category: $category, cause: $cause, irsClassification: $irsClassification, mailingAddress: $mailingAddress, donationAddress: $donationAddress, advisories: $advisories, organization: $organization)';
+    return 'Charity(charityNavigatorURL: $charityNavigatorURL, mission: $mission, websiteURL: $websiteURL, tagLine: $tagLine, charityName: $charityName, ein: $ein, currentRating: $currentRating, category: $category, cause: $cause, irsClassification: $irsClassification, mailingAddress: $mailingAddress, donationAddress: $donationAddress, advisories: $advisories, organization: $organization)';
   }
 
   @override
@@ -445,11 +445,11 @@ class _$_Charity implements _Charity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Charity &&
-            (identical(other.charityNavigatorUrl, charityNavigatorUrl) ||
-                other.charityNavigatorUrl == charityNavigatorUrl) &&
+            (identical(other.charityNavigatorURL, charityNavigatorURL) ||
+                other.charityNavigatorURL == charityNavigatorURL) &&
             (identical(other.mission, mission) || other.mission == mission) &&
-            (identical(other.websiteUrl, websiteUrl) ||
-                other.websiteUrl == websiteUrl) &&
+            (identical(other.websiteURL, websiteURL) ||
+                other.websiteURL == websiteURL) &&
             (identical(other.tagLine, tagLine) || other.tagLine == tagLine) &&
             (identical(other.charityName, charityName) ||
                 other.charityName == charityName) &&
@@ -475,9 +475,9 @@ class _$_Charity implements _Charity {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      charityNavigatorUrl,
+      charityNavigatorURL,
       mission,
-      websiteUrl,
+      websiteURL,
       tagLine,
       charityName,
       ein,
@@ -506,9 +506,9 @@ class _$_Charity implements _Charity {
 
 abstract class _Charity implements Charity {
   factory _Charity(
-      {final String? charityNavigatorUrl,
+      {final String? charityNavigatorURL,
       final String? mission,
-      final String? websiteUrl,
+      final String? websiteURL,
       final String? tagLine,
       final String? charityName,
       final String? ein,
@@ -524,11 +524,11 @@ abstract class _Charity implements Charity {
   factory _Charity.fromJson(Map<String, dynamic> json) = _$_Charity.fromJson;
 
   @override
-  String? get charityNavigatorUrl;
+  String? get charityNavigatorURL;
   @override
   String? get mission;
   @override
-  String? get websiteUrl;
+  String? get websiteURL;
   @override
   String? get tagLine;
   @override

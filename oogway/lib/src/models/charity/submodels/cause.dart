@@ -6,9 +6,9 @@ part 'cause.g.dart';
 @freezed
 class Cause with _$Cause {
   factory Cause({
-    int? causeId,
+    int? causeID,
     String? causeName,
-    String? charityNavigatorUrl,
+    String? charityNavigatorURL,
     String? image,
   }) = _Cause;
 

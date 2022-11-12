@@ -20,9 +20,9 @@ Cause _$CauseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Cause {
-  int? get causeId => throw _privateConstructorUsedError;
+  int? get causeID => throw _privateConstructorUsedError;
   String? get causeName => throw _privateConstructorUsedError;
-  String? get charityNavigatorUrl => throw _privateConstructorUsedError;
+  String? get charityNavigatorURL => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,9 +36,9 @@ abstract class $CauseCopyWith<$Res> {
       _$CauseCopyWithImpl<$Res, Cause>;
   @useResult
   $Res call(
-      {int? causeId,
+      {int? causeID,
       String? causeName,
-      String? charityNavigatorUrl,
+      String? charityNavigatorURL,
       String? image});
 }
 
@@ -55,23 +55,23 @@ class _$CauseCopyWithImpl<$Res, $Val extends Cause>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? causeId = freezed,
+    Object? causeID = freezed,
     Object? causeName = freezed,
-    Object? charityNavigatorUrl = freezed,
+    Object? charityNavigatorURL = freezed,
     Object? image = freezed,
   }) {
     return _then(_value.copyWith(
-      causeId: freezed == causeId
-          ? _value.causeId
-          : causeId // ignore: cast_nullable_to_non_nullable
+      causeID: freezed == causeID
+          ? _value.causeID
+          : causeID // ignore: cast_nullable_to_non_nullable
               as int?,
       causeName: freezed == causeName
           ? _value.causeName
           : causeName // ignore: cast_nullable_to_non_nullable
               as String?,
-      charityNavigatorUrl: freezed == charityNavigatorUrl
-          ? _value.charityNavigatorUrl
-          : charityNavigatorUrl // ignore: cast_nullable_to_non_nullable
+      charityNavigatorURL: freezed == charityNavigatorURL
+          ? _value.charityNavigatorURL
+          : charityNavigatorURL // ignore: cast_nullable_to_non_nullable
               as String?,
       image: freezed == image
           ? _value.image
@@ -88,9 +88,9 @@ abstract class _$$_CauseCopyWith<$Res> implements $CauseCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? causeId,
+      {int? causeID,
       String? causeName,
-      String? charityNavigatorUrl,
+      String? charityNavigatorURL,
       String? image});
 }
 
@@ -103,23 +103,23 @@ class __$$_CauseCopyWithImpl<$Res> extends _$CauseCopyWithImpl<$Res, _$_Cause>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? causeId = freezed,
+    Object? causeID = freezed,
     Object? causeName = freezed,
-    Object? charityNavigatorUrl = freezed,
+    Object? charityNavigatorURL = freezed,
     Object? image = freezed,
   }) {
     return _then(_$_Cause(
-      causeId: freezed == causeId
-          ? _value.causeId
-          : causeId // ignore: cast_nullable_to_non_nullable
+      causeID: freezed == causeID
+          ? _value.causeID
+          : causeID // ignore: cast_nullable_to_non_nullable
               as int?,
       causeName: freezed == causeName
           ? _value.causeName
           : causeName // ignore: cast_nullable_to_non_nullable
               as String?,
-      charityNavigatorUrl: freezed == charityNavigatorUrl
-          ? _value.charityNavigatorUrl
-          : charityNavigatorUrl // ignore: cast_nullable_to_non_nullable
+      charityNavigatorURL: freezed == charityNavigatorURL
+          ? _value.charityNavigatorURL
+          : charityNavigatorURL // ignore: cast_nullable_to_non_nullable
               as String?,
       image: freezed == image
           ? _value.image
@@ -133,23 +133,23 @@ class __$$_CauseCopyWithImpl<$Res> extends _$CauseCopyWithImpl<$Res, _$_Cause>
 @JsonSerializable()
 class _$_Cause implements _Cause {
   _$_Cause(
-      {this.causeId, this.causeName, this.charityNavigatorUrl, this.image});
+      {this.causeID, this.causeName, this.charityNavigatorURL, this.image});
 
   factory _$_Cause.fromJson(Map<String, dynamic> json) =>
       _$$_CauseFromJson(json);
 
   @override
-  final int? causeId;
+  final int? causeID;
   @override
   final String? causeName;
   @override
-  final String? charityNavigatorUrl;
+  final String? charityNavigatorURL;
   @override
   final String? image;
 
   @override
   String toString() {
-    return 'Cause(causeId: $causeId, causeName: $causeName, charityNavigatorUrl: $charityNavigatorUrl, image: $image)';
+    return 'Cause(causeID: $causeID, causeName: $causeName, charityNavigatorURL: $charityNavigatorURL, image: $image)';
   }
 
   @override
@@ -157,18 +157,18 @@ class _$_Cause implements _Cause {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Cause &&
-            (identical(other.causeId, causeId) || other.causeId == causeId) &&
+            (identical(other.causeID, causeID) || other.causeID == causeID) &&
             (identical(other.causeName, causeName) ||
                 other.causeName == causeName) &&
-            (identical(other.charityNavigatorUrl, charityNavigatorUrl) ||
-                other.charityNavigatorUrl == charityNavigatorUrl) &&
+            (identical(other.charityNavigatorURL, charityNavigatorURL) ||
+                other.charityNavigatorURL == charityNavigatorURL) &&
             (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, causeId, causeName, charityNavigatorUrl, image);
+      Object.hash(runtimeType, causeID, causeName, charityNavigatorURL, image);
 
   @JsonKey(ignore: true)
   @override
@@ -186,19 +186,19 @@ class _$_Cause implements _Cause {
 
 abstract class _Cause implements Cause {
   factory _Cause(
-      {final int? causeId,
+      {final int? causeID,
       final String? causeName,
-      final String? charityNavigatorUrl,
+      final String? charityNavigatorURL,
       final String? image}) = _$_Cause;
 
   factory _Cause.fromJson(Map<String, dynamic> json) = _$_Cause.fromJson;
 
   @override
-  int? get causeId;
+  int? get causeID;
   @override
   String? get causeName;
   @override
-  String? get charityNavigatorUrl;
+  String? get charityNavigatorURL;
   @override
   String? get image;
   @override

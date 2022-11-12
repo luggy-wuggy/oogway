@@ -7,9 +7,9 @@ part 'charity.g.dart';
 @freezed
 class Charity with _$Charity {
   factory Charity({
-    String? charityNavigatorUrl,
+    String? charityNavigatorURL,
     String? mission,
-    String? websiteUrl,
+    String? websiteURL,
     String? tagLine,
     String? charityName,
     String? ein,
