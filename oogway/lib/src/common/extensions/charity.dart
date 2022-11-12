@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:oogway/src/models/charity.dart';
+import 'package:oogway/src/models/charity/charity.dart';
 
 extension CharityExtension on Charity {
   int get charityId {
-    var linkList = (cause?.charityNavigatorUrl ?? "").split("&");
+    try {
+      var linkList = (cause?.charityNavigatorURL ?? "").split("&");
 
-    var cgID = linkList.firstWhere(
-      (element) {
-        return element.contains("cgid=");
-      },
-    );
+      var cgID = linkList.firstWhere(
+        (element) {
+          return element.contains("cgid=");
+        },
+      );
 
-    var id = cgID.split("=");
+      var id = cgID.split("=");
 
-    return int.parse(id.last);
+      return int.parse(id.last);
+    } on Exception {
+      return 0;
+    }
   }
 
   IconData get charityIcon {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/domain/usecases/usecases.dart';
-import 'package:oogway/src/models/charity.dart';
+import 'package:oogway/src/models/charity/charity.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 import 'package:oogway/src/ui/root/ui/home/controller/category_controller.dart';
 

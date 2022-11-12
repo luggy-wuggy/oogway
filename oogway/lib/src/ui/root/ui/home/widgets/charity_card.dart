@@ -3,7 +3,7 @@ import 'package:oogway/src/common/constants/ui.dart';
 import 'package:oogway/src/common/extensions/charity.dart';
 import 'package:oogway/src/common/extensions/double.dart';
 import 'package:oogway/src/common/extensions/string.dart';
-import 'package:oogway/src/models/charity.dart';
+import 'package:oogway/src/models/charity/charity.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingCharityCard extends StatelessWidget {

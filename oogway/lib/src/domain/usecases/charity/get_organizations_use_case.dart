@@ -1,5 +1,5 @@
 import 'package:oogway/src/data/facades/facades.dart';
-import 'package:oogway/src/models/charity.dart';
+import 'package:oogway/src/models/charity/charity.dart';
 import 'package:riverpod/riverpod.dart';
 
 class GetOrganizationsUseCase {

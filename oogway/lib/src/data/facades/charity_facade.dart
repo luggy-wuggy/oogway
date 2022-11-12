@@ -1,7 +1,16 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import 'package:oogway/src/models/charity.dart';
+import 'package:oogway/src/models/charity/charity.dart';
+import 'package:oogway/src/models/charity/charity_list.dart';
 import 'package:riverpod/riverpod.dart';
 import 'dart:developer';
+
+List<Charity> charityFromJson(String str) =>
+    List<Charity>.from(json.decode(str).map((x) => Charity.fromJson(x)));
+
+String charityToJson(List<Charity> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CharityNavigatorFacade {
   final client = http.Client();
@@ -9,8 +18,10 @@ class CharityNavigatorFacade {
   Future<List<Charity>> fetchCharities() async {
     var response = await client.get(CharityApiStrings.charityURI);
     if (response.statusCode == 200) {
-      var jsonString = response.body;
-      return charityFromJson(jsonString);
+      final jsonString = jsonDecode(response.body);
+      final charityList = CharityList.fromJson(jsonString);
+
+      return charityList.charities;
     } else {
       //show error message
       return [];
@@ -20,9 +31,13 @@ class CharityNavigatorFacade {
   Future<List<Charity>> fetchCharitiesByCategory(int i) async {
     var response = await client.get(CharityApiStrings().uriByCategory(i)!);
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      final jsonString = response.body;
 
-      return charityFromJson(jsonString);
+      final charities = charityFromJson(jsonString);
+
+      print(charities.first);
+
+      return charities;
     } else {
       //show error message
       return [];
@@ -34,9 +49,10 @@ class CharityNavigatorFacade {
       print(s);
       var response = await client.get(CharityApiStrings().uriBySearch(s)!);
       if (response.statusCode == 200) {
-        var jsonString = response.body;
-        print(jsonString);
-        return charityFromJson(jsonString);
+        final jsonString = jsonDecode(response.body);
+        final charityList = CharityList.fromJson(jsonString);
+
+        return charityList.charities;
       } else {
         //show error message
         return [];
