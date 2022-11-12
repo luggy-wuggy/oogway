@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oogway/src/models/charity.dart';
+import 'package:oogway/src/models/charity/charity.dart';
 
 extension CharityExtension on Charity {
   int get charityId {
