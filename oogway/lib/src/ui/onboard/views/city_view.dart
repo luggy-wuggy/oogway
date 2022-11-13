@@ -5,7 +5,6 @@ import 'package:oogway/src/common/ui/device_padding.dart';
 import 'package:oogway/src/models/google_places.dart';
 import 'package:oogway/src/ui/onboard/controllers/address_search_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_action_controller.dart';
-import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 import 'package:oogway/src/ui/widgets/long_button.dart';
 import 'package:oogway/src/ui/widgets/text_field.dart';
 

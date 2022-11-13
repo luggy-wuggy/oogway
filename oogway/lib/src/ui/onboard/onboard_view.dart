@@ -8,12 +8,9 @@ import 'package:oogway/src/ui/controllers/page_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_action_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
 import 'package:oogway/src/ui/onboard/widgets/arrow_back.dart';
-import 'package:oogway/src/ui/onboard/widgets/city_view.dart';
-import 'package:oogway/src/ui/onboard/widgets/finish_view.dart';
-import 'package:oogway/src/ui/onboard/widgets/introduction_view.dart';
-import 'package:oogway/src/ui/onboard/widgets/name_view.dart';
 import 'package:oogway/src/ui/onboard/widgets/page_indicator.dart';
-import 'package:oogway/src/ui/onboard/widgets/passion_view.dart';
+
+import 'views/views.dart';
 
 class OnboardView extends ConsumerStatefulWidget {
   const OnboardView({Key? key}) : super(key: key);
