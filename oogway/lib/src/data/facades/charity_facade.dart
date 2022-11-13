@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:oogway/src/models/charity/charity.dart';
-import 'package:oogway/src/models/charity/charity_list.dart';
 import 'package:riverpod/riverpod.dart';
 import 'dart:developer';
 
@@ -18,10 +17,9 @@ class CharityNavigatorFacade {
   Future<List<Charity>> fetchCharities() async {
     var response = await client.get(CharityApiStrings.charityURI);
     if (response.statusCode == 200) {
-      final jsonString = jsonDecode(response.body);
-      final charityList = CharityList.fromJson(jsonString);
-
-      return charityList.charities;
+      final jsonString = response.body;
+      final charities = charityFromJson(jsonString);
+      return charities;
     } else {
       //show error message
       return [];
@@ -32,11 +30,7 @@ class CharityNavigatorFacade {
     var response = await client.get(CharityApiStrings().uriByCategory(i)!);
     if (response.statusCode == 200) {
       final jsonString = response.body;
-
       final charities = charityFromJson(jsonString);
-
-      print(charities.first);
-
       return charities;
     } else {
       //show error message
@@ -49,10 +43,9 @@ class CharityNavigatorFacade {
       print(s);
       var response = await client.get(CharityApiStrings().uriBySearch(s)!);
       if (response.statusCode == 200) {
-        final jsonString = jsonDecode(response.body);
-        final charityList = CharityList.fromJson(jsonString);
-
-        return charityList.charities;
+        final jsonString = response.body;
+        final charities = charityFromJson(jsonString);
+        return charities;
       } else {
         //show error message
         return [];
