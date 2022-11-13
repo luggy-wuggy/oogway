@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:oogway/src/common/constants/secure_storage.dart';
 import 'package:oogway/src/common/extensions/logger.dart';
 import 'package:oogway/src/common/extensions/map.dart';
+import 'package:oogway/src/data/data.dart';
+import 'package:oogway/src/models/charity/charity.dart';
+import 'package:oogway/src/ui/charity_details/charity_details.view.dart';
 import 'package:oogway/src/ui/root/root_view.dart';
 import 'package:oogway/src/ui/onboard/onboard_view.dart';
 import 'package:oogway/src/ui/splash/splash_view.dart';
@@ -78,6 +81,17 @@ class OogwayRouter extends ChangeNotifier with Logging {
             name: RootView.routeName,
             path: _routeMap.get(RootView.routeName),
             builder: (context, state) => const RootView(),
+            routes: [
+              GoRoute(
+                name: CharityDetailsView.routeName,
+                path: _routeMap.get(CharityDetailsView.routeName),
+                builder: ((context, state) {
+                  final Charity charity = state.extra as Charity;
+
+                  return CharityDetailsView(charity: charity);
+                }),
+              )
+            ],
           ),
         ],
         urlPathStrategy: UrlPathStrategy.path,
@@ -89,6 +103,7 @@ const Map<String, String> _routeMap = {
   OnboardView.routeName: '/${OnboardView.routeName}',
   RootView.routeName: '/${RootView.routeName}',
   SplashView.routeName: '/${SplashView.routeName}',
+  CharityDetailsView.routeName: CharityDetailsView.routeName
 };
 
 final oogwayRouterProvider = ChangeNotifierProvider<OogwayRouter>((ref) {
