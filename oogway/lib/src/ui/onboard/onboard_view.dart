@@ -7,7 +7,7 @@ import 'package:oogway/src/ui/onboard/controllers/onboard_animation_controller.d
 import 'package:oogway/src/ui/controllers/page_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_action_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_flow_controller.dart';
-import 'package:oogway/src/ui/onboard/widgets/arrow_back.dart';
+import 'package:oogway/src/ui/widgets/icon_button.dart';
 import 'package:oogway/src/ui/onboard/widgets/page_indicator.dart';
 
 import 'views/views.dart';
@@ -117,7 +117,7 @@ class _OnboardContent extends ConsumerWidget {
                 top: 60,
                 child: Transform.translate(
                   offset: Offset(translateX, 0),
-                  child: OogwayArrowBack(
+                  child: OogwayIconButton(
                     onTap: () async {
                       if (onboardFlowController.currentPage ==
                           OnboardFlowPageType.name) {
@@ -129,6 +129,7 @@ class _OnboardContent extends ConsumerWidget {
                       }
                       onboardFlowController.previousPage();
                     },
+                    icon: Icons.arrow_back,
                   ),
                 ),
               );

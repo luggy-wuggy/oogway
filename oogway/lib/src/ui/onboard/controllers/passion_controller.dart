@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:oogway/src/common/extensions/string.dart';
+import 'package:oogway/src/common/extensions/string_extension.dart';
 
 class PassionSelectionController extends ChangeNotifier {
   List<Passion> _unselectedPassions = Passion.values.toList();

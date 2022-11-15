@@ -1,4 +1,4 @@
-import 'package:oogway/src/common/extensions/logger.dart';
+import 'package:oogway/src/common/extensions/logger_extension.dart';
 import 'package:oogway/src/data/facades/google_places_facade.dart';
 import 'package:oogway/src/models/google_places.dart';
 import 'package:riverpod/riverpod.dart';

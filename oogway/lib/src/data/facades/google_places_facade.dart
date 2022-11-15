@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:oogway/src/common/extensions/response.dart';
+import 'package:oogway/src/common/extensions/response_extension.dart';
 import 'package:oogway/src/models/google_places.dart';
 import 'package:riverpod/riverpod.dart';
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oogway/src/common/constants/secure_storage.dart';
-import 'package:oogway/src/common/extensions/logger.dart';
-import 'package:oogway/src/common/extensions/map.dart';
+import 'package:oogway/src/common/extensions/logger_extension.dart';
+import 'package:oogway/src/common/extensions/map_extension.dart';
 import 'package:oogway/src/data/data.dart';
 import 'package:oogway/src/models/charity/charity.dart';
 import 'package:oogway/src/ui/charity_details/charity_details.view.dart';
@@ -85,11 +85,14 @@ class OogwayRouter extends ChangeNotifier with Logging {
               GoRoute(
                 name: CharityDetailsView.routeName,
                 path: _routeMap.get(CharityDetailsView.routeName),
-                builder: ((context, state) {
+                pageBuilder: (context, state) {
                   final Charity charity = state.extra as Charity;
 
-                  return CharityDetailsView(charity: charity);
-                }),
+                  return MaterialPage(
+                    child: CharityDetailsView(charity: charity),
+                    fullscreenDialog: true,
+                  );
+                },
               )
             ],
           ),

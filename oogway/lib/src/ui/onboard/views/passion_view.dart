@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/constants/ui.dart';
-import 'package:oogway/src/common/extensions/string.dart';
+import 'package:oogway/src/common/extensions/string_extension.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_animation_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/onboard_action_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';

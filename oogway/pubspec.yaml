@@ -37,6 +37,8 @@ dependencies:
   enum_to_string: ^2.0.1
   http: ^0.13.5
   favicon: ^1.1.0
+  auto_size_text: ^3.0.0
+  percent_indicator: ^4.2.2
 
 dev_dependencies:
   flutter_test:

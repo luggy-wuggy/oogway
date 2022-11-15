@@ -105,7 +105,7 @@ class PassionPills extends StatelessWidget {
           vertical: verticalPadding,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(80),
           color: pillColor,
         ),
         child: Text(
@@ -114,6 +114,7 @@ class PassionPills extends StatelessWidget {
             fontSize: titleFontSize,
             color: textColor,
           ),
+          maxLines: 1,
         ),
       ),
     );

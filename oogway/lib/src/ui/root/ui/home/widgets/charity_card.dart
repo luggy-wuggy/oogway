@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/app_router.dart';
 import 'package:oogway/src/common/constants/ui.dart';
-import 'package:oogway/src/common/extensions/charity.dart';
-import 'package:oogway/src/common/extensions/double.dart';
-import 'package:oogway/src/common/extensions/string.dart';
+import 'package:oogway/src/common/extensions/charity_extension.dart';
+import 'package:oogway/src/common/extensions/double_extension.dart';
+import 'package:oogway/src/common/extensions/string_extension.dart';
 import 'package:oogway/src/models/charity/charity.dart';
 import 'package:oogway/src/ui/charity_details/charity_details.view.dart';
 import 'package:oogway/src/ui/controllers/favicon_controller.dart';
+import 'package:oogway/src/ui/widgets/heart.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingCharityCard extends StatelessWidget {
@@ -259,10 +260,7 @@ class CharityCard extends ConsumerWidget {
           const Positioned(
             bottom: 16,
             right: 40,
-            child: Icon(
-              Icons.favorite_border_rounded,
-              color: OogwayColors.kPrimaryCoralColor,
-            ),
+            child: OogwayFavoriteHeart(),
           )
         ],
       ),

@@ -5,4 +5,8 @@ class OogwayColors {
   static const kPrimaryTransparentDarkColor = Color(0xFF446D72);
   static const kPrimaryLightColor = Color(0xFFFAF1E6);
   static const kPrimaryCoralColor = Color(0xFFE7886E);
+  static const kPrimaryLightBlueAccentColor = Color(0xff82C2B0);
+  static const kPrimaryLightGreenColor = Color(0xffAFD271);
+  static const kPrimaryGreenColor = Color(0xff258A15);
+  static const kLightBlue = Color(0xFF12A7C8);
 }

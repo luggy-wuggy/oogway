@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:oogway/src/common/extensions/logger.dart';
+import 'package:oogway/src/common/extensions/logger_extension.dart';
 
 class AuthenticationFacade with Logging {
   final FirebaseAuth firebaseAuth;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:oogway/src/common/extensions/string_extension.dart';
 import 'package:oogway/src/models/charity/charity.dart';
+import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 
 extension CharityExtension on Charity {
   int get charityId {
@@ -47,5 +49,11 @@ extension CharityExtension on Charity {
       default:
         return Icons.spa;
     }
+  }
+
+  String get charityCategoryName {
+    final charityCategoryInt = charityId;
+    final charityCategoryEnum = Passion.values[charityCategoryInt];
+    return charityCategoryEnum.enumToString();
   }
 }

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:oogway/src/common/constants/ui.dart';
 
-class OogwayArrowBack extends StatelessWidget {
-  const OogwayArrowBack({Key? key, this.onTap}) : super(key: key);
+class OogwayIconButton extends StatelessWidget {
+  const OogwayIconButton({
+    Key? key,
+    this.onTap,
+    required this.icon,
+  }) : super(key: key);
 
   final Function? onTap;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +17,8 @@ class OogwayArrowBack extends StatelessWidget {
       onTap: () {
         onTap?.call();
       },
-      child: const Icon(
-        Icons.arrow_back,
+      child: Icon(
+        icon,
         color: OogwayColors.kPrimaryLightColor,
         size: 30,
       ),

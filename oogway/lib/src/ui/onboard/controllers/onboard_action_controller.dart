@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:oogway/src/common/extensions/logger.dart';
+import 'package:oogway/src/common/extensions/logger_extension.dart';
 
 import 'package:oogway/src/domain/usecases/usecases.dart';
 import 'package:oogway/src/models/google_places.dart';
