@@ -9,7 +9,7 @@ import 'package:oogway/src/models/charity/charity.dart';
 import 'package:oogway/src/models/google_places.dart';
 import 'package:shimmer/shimmer.dart';
 
-class MapView extends ConsumerStatefulWidget {
+class MapView extends ConsumerWidget {
   const MapView({
     super.key,
     required this.charity,
@@ -18,18 +18,8 @@ class MapView extends ConsumerStatefulWidget {
   final Charity charity;
 
   @override
-  ConsumerState<MapView> createState() => _MapViewState();
-}
-
-class _MapViewState extends ConsumerState<MapView> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final charityLatLng = ref.watch(charityLatLngProvider(widget.charity));
+  Widget build(BuildContext context, WidgetRef ref) {
+    final charityLatLng = ref.watch(charityLatLngProvider(charity));
 
     return charityLatLng.when(
       data: (data) {
@@ -51,7 +41,7 @@ class _MapViewState extends ConsumerState<MapView> {
                 markers: {
                   Marker(
                     markerId: MarkerId(
-                      widget.charity.charityName ?? "charity name",
+                      charity.charityName ?? "charity name",
                     ),
                     position: LatLng(data?.lat ?? 0, data?.lng ?? 0),
                     icon: BitmapDescriptor.defaultMarkerWithHue(
@@ -72,7 +62,7 @@ class _MapViewState extends ConsumerState<MapView> {
               bottom: 12,
               right: 12,
               child: Text(
-                "${widget.charity.mailingAddress?.city ?? ""}, ${widget.charity.mailingAddress?.stateOrProvince ?? ""}",
+                "${charity.mailingAddress?.city ?? ""}, ${charity.mailingAddress?.stateOrProvince ?? ""}",
                 style: const TextStyle(
                   color: OogwayColors.kPrimaryDarkColor,
                   fontSize: 18,
@@ -84,7 +74,16 @@ class _MapViewState extends ConsumerState<MapView> {
         );
       },
       error: (error, stackTrace) {
-        return const CircularProgressIndicator();
+        return Container(
+          height: 225,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: OogwayColors.kPrimaryTransparentDarkColor,
+          ),
+          alignment: Alignment.center,
+          child: Text("$error"),
+        );
       },
       loading: () {
         return Shimmer.fromColors(

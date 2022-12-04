@@ -42,14 +42,31 @@ class _DetailsMissionState extends State<DetailsMission> {
         const SizedBox(height: 12),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Text(
-            widget.charity.mission ?? "",
-            style: const TextStyle(
-              color: OogwayColors.kPrimaryLightColor,
-              fontSize: 15,
+          child: AnimatedCrossFade(
+            duration: const Duration(milliseconds: 200),
+            crossFadeState: isMissionExpanded
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            firstChild: Text(
+              widget.charity.mission ?? "",
+              style: const TextStyle(
+                color: OogwayColors.kPrimaryLightColor,
+                fontSize: 15,
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
-            maxLines: isMissionExpanded ? null : 3,
-            overflow: isMissionExpanded ? null : TextOverflow.ellipsis,
+            secondChild: Text(
+              widget.charity.mission ?? "",
+              style: const TextStyle(
+                color: OogwayColors.kPrimaryLightColor,
+                fontSize: 15,
+              ),
+              maxLines: null,
+              overflow: null,
+            ),
+            firstCurve: Curves.easeInOutCubicEmphasized,
+            secondCurve: Curves.easeOutExpo,
           ),
         ),
         Padding(
