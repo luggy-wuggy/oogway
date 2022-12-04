@@ -42,35 +42,39 @@ class _CharityList extends ConsumerWidget {
     AsyncValue<List<Charity>?> charity =
         ref.watch(forYouCharityProvider(passion.index));
 
-    return charity.when(loading: () {
-      return ListView(
-        children: const [
-          LoadingCharityCard(),
-          SizedBox(height: 20),
-          LoadingCharityCard(),
-          SizedBox(height: 20),
-          LoadingCharityCard(),
-          SizedBox(height: 20),
-          LoadingCharityCard(),
-        ],
-      );
-    }, error: (error, stackTrace) {
-      return const SizedBox.shrink();
-    }, data: (data) {
-      return ListView.builder(
-        itemCount: data?.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              CharityCard(
-                charity: data![index],
-              ),
-              const SizedBox(height: 20),
-            ],
-          );
-        },
-      );
-    });
+    return charity.when(
+      loading: () {
+        return ListView(
+          children: const [
+            LoadingCharityCard(),
+            SizedBox(height: 20),
+            LoadingCharityCard(),
+            SizedBox(height: 20),
+            LoadingCharityCard(),
+            SizedBox(height: 20),
+            LoadingCharityCard(),
+          ],
+        );
+      },
+      error: (error, stackTrace) {
+        return const SizedBox.shrink();
+      },
+      data: (data) {
+        return ListView.builder(
+          itemCount: data?.length,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                CharityCard(
+                  charity: data![index],
+                ),
+                const SizedBox(height: 20),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 }
 

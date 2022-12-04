@@ -14,6 +14,9 @@ const String googlePlacesAutocompleteBaseUrl =
 const String googlePlacesDetailsBaseUrl =
     "https://maps.googleapis.com/maps/api/place/details/json?";
 
+const String googlePlacesGeocodeBaseUrl =
+    "https://maps.googleapis.com/maps/api/geocode/json?";
+
 /// A facade over our Google Places services, Places Autocomplete and Places Details.
 class GooglePlacesFacade {
   /// Utilize the Autocomplete API to get the place suggestions per user String [input]
@@ -64,6 +67,30 @@ class GooglePlacesFacade {
         switch (result['status']) {
           case "OK":
             return PlaceDetail.fromMap(result['result']);
+          default:
+            return null;
+        }
+      } else {
+        throw Exception('Failed to fetch place detail');
+      }
+    } on Exception catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<LatLngPlaces?> fetchLatLngFromAddress(String address) async {
+    try {
+      var response =
+          await Dio().get(googlePlacesGeocodeBaseUrl, queryParameters: {
+        'address': address,
+        'key': googlePlacesApiKey,
+      });
+
+      if (response.isOk) {
+        final result = response.data;
+        switch (result['status']) {
+          case "OK":
+            return LatLngPlaces.fromMap(result["results"][0]);
           default:
             return null;
         }

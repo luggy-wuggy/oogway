@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:oogway/src/common/constants/ui.dart';
+import 'package:oogway/src/domain/usecases/charity/get_charity_lat_lng_use_case.dart';
 import 'package:oogway/src/models/charity/charity.dart';
-import 'package:oogway/src/ui/charity_details/widgets/details_category_list.dart';
-import 'package:oogway/src/ui/charity_details/widgets/details_header.dart';
-import 'package:oogway/src/ui/charity_details/widgets/details_mission.dart';
-import 'package:oogway/src/ui/charity_details/widgets/details_ratings.dart';
-import 'package:oogway/src/ui/charity_details/widgets/top_app_bar.dart';
+import 'package:oogway/src/ui/charity_details/widgets/widgets.dart';
+import 'package:oogway/src/ui/widgets/long_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CharityDetailsView extends ConsumerWidget {
   const CharityDetailsView({
@@ -54,6 +52,11 @@ class CharityDetailsView extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: MapView(charity: charity),
                 ),
+                const SizedBox(height: 24),
+                Align(
+                  alignment: Alignment.center,
+                  child: DonateButton(charity: charity),
+                ),
               ],
             ),
           ),
@@ -63,48 +66,39 @@ class CharityDetailsView extends ConsumerWidget {
   }
 }
 
-class MapView extends StatelessWidget {
-  const MapView({
+class DonateButton extends ConsumerStatefulWidget {
+  const DonateButton({
     super.key,
     required this.charity,
   });
 
   final Charity charity;
 
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  @override
+  ConsumerState<DonateButton> createState() => _DonateButtonState();
+}
+
+class _DonateButtonState extends ConsumerState<DonateButton> {
+  late Uri charityWebsite;
+
+  @override
+  void initState() {
+    super.initState();
+    charityWebsite = Uri.parse(widget.charity.websiteURL ?? "");
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          height: 225,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: const GoogleMap(
-            initialCameraPosition: _kGooglePlex,
-            mapType: MapType.normal,
-            myLocationButtonEnabled: false,
-            scrollGesturesEnabled: false,
-          ),
-        ),
-        Positioned(
-          bottom: 12,
-          right: 12,
-          child: Text(
-            "${charity.mailingAddress?.city ?? ""}, ${charity.mailingAddress?.stateOrProvince ?? ""}",
-            style: const TextStyle(
-              color: OogwayColors.kPrimaryDarkColor,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        )
-      ],
+    return OogwayLongButton(
+      backgroundColor: OogwayColors.kPrimaryLightColor,
+      pressedColor: OogwayColors.kPrimaryLightColor,
+      childColor: OogwayColors.kPrimaryDarkColor,
+      title: "Donate now",
+      onPressed: () async {
+        if (!await launchUrl(charityWebsite)) {
+          throw 'Could not launch $charityWebsite';
+        }
+      },
     );
   }
 }
