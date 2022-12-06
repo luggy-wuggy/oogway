@@ -25,6 +25,7 @@ class OogwayUser {
     date = doc['date'].toDate();
     name = doc['name'];
     passions = passionList;
+    print(locDoc.data());
     // place?.city = locDoc[0]["city"];
     // place?.state = locDoc[0]["state"];
     // place?.street = locDoc[0]["street"];
