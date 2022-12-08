@@ -1,3 +1,11 @@
+android {
+    compileSdkVersion flutter.compileSdkVersion
+    
+    defaultConfig {
+        minSdkVersion 20
+    }
+}
+
 buildscript {
     ext.kotlin_version = '1.6.10'
     repositories {

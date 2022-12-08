@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oogway/src/common/constants/ui.dart';
 import 'package:oogway/src/models/charity/charity.dart';
 
-class DetailsMission extends StatelessWidget {
+class DetailsMission extends StatefulWidget {
   const DetailsMission({
     super.key,
     required this.charity,
@@ -11,8 +11,22 @@ class DetailsMission extends StatelessWidget {
   final Charity charity;
 
   @override
+  State<DetailsMission> createState() => _DetailsMissionState();
+}
+
+class _DetailsMissionState extends State<DetailsMission> {
+  bool isMissionExpanded = false;
+
+  void toggleMissionExpansion() {
+    setState(() {
+      isMissionExpanded = !isMissionExpanded;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 24),
@@ -28,26 +42,48 @@ class DetailsMission extends StatelessWidget {
         const SizedBox(height: 12),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Text(
-            charity.mission ?? "",
-            style: const TextStyle(
-              color: OogwayColors.kPrimaryLightColor,
-              fontSize: 15,
+          child: AnimatedCrossFade(
+            duration: const Duration(milliseconds: 200),
+            crossFadeState: isMissionExpanded
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            firstChild: Text(
+              widget.charity.mission ?? "",
+              style: const TextStyle(
+                color: OogwayColors.kPrimaryLightColor,
+                fontSize: 15,
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
+            secondChild: Text(
+              widget.charity.mission ?? "",
+              style: const TextStyle(
+                color: OogwayColors.kPrimaryLightColor,
+                fontSize: 15,
+              ),
+              maxLines: null,
+              overflow: null,
+            ),
+            firstCurve: Curves.easeInOutCubicEmphasized,
+            secondCurve: Curves.easeOutExpo,
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              "read more",
-              style: TextStyle(
-                color: OogwayColors.kLightBlue,
-                fontSize: 12,
-                decoration: TextDecoration.underline,
+            child: GestureDetector(
+              onTap: () {
+                toggleMissionExpansion();
+              },
+              child: Text(
+                isMissionExpanded ? "read less" : "read more",
+                style: const TextStyle(
+                  color: OogwayColors.kLightBlue,
+                  fontSize: 12,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             ),
           ),

@@ -92,3 +92,33 @@ class PlaceSuggestion {
     return 'Suggestion( placeId: $placeId\n mainText: $mainText\n secondaryText: $secondaryText)';
   }
 }
+
+/// Class object to deserialize JSON result from Google Places Geocode API
+class LatLngPlaces {
+  LatLngPlaces({
+    required this.placeId,
+    required this.lat,
+    required this.lng,
+  });
+
+  final String placeId;
+  final double lat;
+  final double lng;
+
+  factory LatLngPlaces.fromMap(Map<String, dynamic> data) {
+    final placeId = data['place_id'] as String;
+    final lat = data['geometry']['location']['lat'] as double;
+    final lng = data['geometry']['location']['lng'] as double;
+
+    return LatLngPlaces(
+      placeId: placeId,
+      lat: lat,
+      lng: lng,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'LatLngPlaces( placeId: $placeId\n Lat: $lat\n Lng: $lng)';
+  }
+}
