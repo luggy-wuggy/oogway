@@ -15,16 +15,19 @@ class OogwayFirestoreDatabase with Logging {
       await _database.collection('users').doc(user.id).set({
         "date": user.date,
         "name": user.name,
+        "placeId": user.place?.placeID,
         "passions": user.passions.map((Passion e) {
           return e.enumToString();
         }).toList(),
       });
 
+      print("PRINT PLACEID: ${user.place?.placeID}");
+
       await _database
           .collection('users')
           .doc(user.id)
           .collection('location')
-          .doc()
+          .doc(user.place?.placeID)
           .set(
         {
           "streetNumber": user.place?.streetNumber,
@@ -92,18 +95,16 @@ class OogwayFirestoreDatabase with Logging {
   Future<OogwayUser> getUser(String uid) async {
     try {
       DocumentSnapshot doc = await _database.collection("users").doc(uid).get();
+
       DocumentSnapshot locDoc = await _database
           .collection("users")
           .doc(uid)
           .collection("location")
-          .doc()
+          .doc(doc['placeId'])
           .get();
-
-      print(locDoc.id);
 
       return OogwayUser.fromDocumentSnapshot(doc, locDoc);
     } catch (e) {
-      print(e);
       rethrow;
     }
   }

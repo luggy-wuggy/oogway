@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oogway/src/common/constants/ui.dart';
+import 'package:oogway/src/common/extensions/string_extension.dart';
 import 'package:oogway/src/domain/usecases/account/sign_out_use_case.dart';
 import 'package:oogway/src/ui/controllers/account_info_controller.dart';
 import 'package:oogway/src/ui/onboard/controllers/controllers.dart';
@@ -50,13 +51,13 @@ class SettingsView extends ConsumerWidget {
                         ],
                       ),
                       Divider(
-                        color: OogwayColors.kPrimaryLightColor.withOpacity(0.4),
-                        thickness: 1.4,
+                        color: OogwayColors.kPrimaryLightColor.withOpacity(0.2),
+                        thickness: 1,
                         height: 48,
                       ),
                       Row(
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Location',
                             style: TextStyle(
                               color: OogwayColors.kPrimaryLightColor,
@@ -64,20 +65,23 @@ class SettingsView extends ConsumerWidget {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Spacer(),
-                          Text(
-                            "Martinez",
-                            style: TextStyle(
-                              color: OogwayColors.kPrimaryLightColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
+                          const SizedBox(width: 80),
+                          Flexible(
+                            child: Text(
+                              data.place.toString(),
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                color: OogwayColors.kPrimaryLightColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           )
                         ],
                       ),
                       Divider(
-                        color: OogwayColors.kPrimaryLightColor.withOpacity(0.4),
-                        thickness: 1.4,
+                        color: OogwayColors.kPrimaryLightColor.withOpacity(0.2),
+                        thickness: 1,
                         height: 48,
                       ),
                       const Text(
@@ -88,14 +92,15 @@ class SettingsView extends ConsumerWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 8),
                       Wrap(
                         runSpacing: 10,
                         spacing: 5,
+                        direction: Axis.horizontal,
                         children: data.passions
                             .map(
                               (e) => PassionPills(
-                                title: e.name,
+                                title: e.enumToString(),
                                 pillColor:
                                     OogwayColors.kPrimaryTransparentDarkColor,
                                 textColor: OogwayColors.kPrimaryLightColor,
