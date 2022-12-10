@@ -24,11 +24,12 @@ class OogwayUser {
     id = doc.id;
     date = doc['date'].toDate();
     name = doc['name'];
+    placeId = doc['placeId'];
     passions = passionList;
-    // place?.city = locDoc[0]["city"];
-    // place?.state = locDoc[0]["state"];
-    // place?.street = locDoc[0]["street"];
-    // place?.streetNumber = locDoc[0]["streetNumber"];
-    // place?.zipCode = locDoc[0]["zipCode"];
+    place?.city = locDoc["city"];
+    place?.state = locDoc["state"];
+    place?.street = locDoc["street"];
+    place?.streetNumber = locDoc["streetNumber"];
+    place?.zipCode = locDoc["zipCode"];
   }
 }

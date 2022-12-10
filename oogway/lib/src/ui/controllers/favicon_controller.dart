@@ -3,7 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final faviconProvider =
     FutureProvider.family<String?, String>((ref, url) async {
-  final iconUrl = await FaviconFinder.getBest(url);
+  if (url.isEmpty) {
+    return null;
+  }
 
-  return iconUrl?.url;
+  final validSchemes = ['http://', 'https://'];
+  final cleanedUrl = validSchemes.any((scheme) => url.startsWith(scheme))
+      ? url
+      : 'http://$url';
+
+  try {
+    final iconUrl = await FaviconFinder.getBest(cleanedUrl);
+    return iconUrl?.url;
+  } catch (err) {
+    return null;
+  }
 });

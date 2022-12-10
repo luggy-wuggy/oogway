@@ -28,7 +28,9 @@ class RootView extends ConsumerWidget {
             Text(
               bottomNav.enumToString(),
               style: const TextStyle(
-                  fontSize: 30, color: OogwayColors.kPrimaryLightColor),
+                fontSize: 30,
+                color: OogwayColors.kPrimaryLightColor,
+              ),
             ),
             const Spacer(),
             Transform(
@@ -59,26 +61,32 @@ class RootView extends ConsumerWidget {
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         backgroundColor: OogwayColors.kPrimaryDarkColor,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             label: "",
             icon: Icon(
               Icons.home_rounded,
-              color: OogwayColors.kPrimaryLightColor,
+              color: bottomNav == RootPages.home
+                  ? OogwayColors.kPrimaryLightColor
+                  : OogwayColors.kPrimaryLightColor.withOpacity(0.4),
             ),
           ),
           BottomNavigationBarItem(
             label: "",
             icon: Icon(
               Icons.search_rounded,
-              color: OogwayColors.kPrimaryLightColor,
+              color: bottomNav == RootPages.search
+                  ? OogwayColors.kPrimaryLightColor
+                  : OogwayColors.kPrimaryLightColor.withOpacity(0.4),
             ),
           ),
           BottomNavigationBarItem(
             label: "",
             icon: Icon(
               Icons.settings_rounded,
-              color: OogwayColors.kPrimaryLightColor,
+              color: bottomNav == RootPages.settings
+                  ? OogwayColors.kPrimaryLightColor
+                  : OogwayColors.kPrimaryLightColor.withOpacity(0.4),
             ),
           ),
         ],
