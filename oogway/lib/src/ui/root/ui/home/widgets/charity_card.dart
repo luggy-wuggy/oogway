@@ -119,7 +119,7 @@ class CharityCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final charityIcon = ref.watch(faviconProvider(charity.websiteURL ?? ""));
+    final faviconCharity = ref.watch(faviconProvider(charity.websiteURL ?? ""));
 
     return GestureDetector(
       onTap: () {
@@ -149,13 +149,14 @@ class CharityCard extends ConsumerWidget {
                       Container(
                         height: 38,
                         width: 38,
+                        clipBehavior: Clip.antiAlias,
                         decoration: const BoxDecoration(
                           color: OogwayColors.kPrimaryTransparentDarkColor,
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                         ),
-                        child: charityIcon.when(
-                          data: (data) {
-                            if (data == null || data.isEmpty) {
+                        child: faviconCharity.when(
+                          data: (favicon) {
+                            if (favicon == null || favicon.isEmpty) {
                               Icon(
                                 charity.charityIcon,
                                 color: OogwayColors.kPrimaryLightColor,
@@ -163,7 +164,7 @@ class CharityCard extends ConsumerWidget {
                             }
 
                             return Image.network(
-                              data ?? "",
+                              favicon ?? "",
                               errorBuilder: (context, error, stackTrace) {
                                 return Icon(
                                   charity.charityIcon,
