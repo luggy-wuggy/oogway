@@ -9,6 +9,8 @@ A charity recommendation app that recommends charities to users based on locatio
 - Utliziting Google Maps API for Maps, Autocomplete, Places Detail, and Geocoding
 - CharityNavigator API to retrieve database of non-profit charities
 
+<img src="https://user-images.githubusercontent.com/54586837/207757714-88aa0ed5-8aff-471f-bcfd-ca9ac19206b1.png" width="150"> <img src="https://user-images.githubusercontent.com/54586837/207757734-4520bad0-427f-4647-989b-74e8353683df.png" width="150"> <img src="https://user-images.githubusercontent.com/54586837/207757749-be3a4f58-0751-4a70-831b-5092b472d574.png" width="150"> <img src="https://user-images.githubusercontent.com/54586837/207758039-81dff19b-25c3-4030-ac5b-bc1d9826f457.png" width="150"> <img src="https://user-images.githubusercontent.com/54586837/207758046-3986e307-9a24-4625-a858-59d91d33dbe2.png" width="150"> <img src="https://user-images.githubusercontent.com/54586837/207758296-d4240c64-8ffd-45fa-8cda-d1dceaf84d5f.png" width="150"> <img src="https://user-images.githubusercontent.com/54586837/207758059-09db5276-75f3-403d-8870-e2abf169bcbe.png" width="150"> 
+
 
 ## Getting Started
 
