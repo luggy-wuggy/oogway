@@ -25,7 +25,7 @@ class AddressSearchController extends ChangeNotifier {
 
   Future<void> getAddressSuggestions({required String address}) async {
     if (address.isEmpty) {
-      clearAddressSuggestions();
+      _clearAddressSuggestions();
       return;
     }
     _suggestions = await getAddressSuggestionsUseCase(address: address);
@@ -34,17 +34,17 @@ class AddressSearchController extends ChangeNotifier {
 
   Future<PlaceDetail?> getAddressDetails({required String placeId}) async {
     selectedAddress = await getAddressDetailsUseCase(placeId: placeId);
-    clearAddressSuggestions();
+    _clearAddressSuggestions();
     return selectedAddress;
   }
 
-  Future<void> clearAddressSuggestions() async {
+  Future<void> _clearAddressSuggestions() async {
     _suggestions?.clear();
     notifyListeners();
   }
 
   void refresh() {
-    clearAddressSuggestions();
+    _clearAddressSuggestions();
     _selectedAddress = null;
     notifyListeners();
   }

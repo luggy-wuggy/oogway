@@ -38,19 +38,18 @@ class CharityNavigatorFacade {
     }
   }
 
-  Future<List<Charity>> fetchCharitiesBySearch(String s) async {
-    if (s != null) {
-      print(s);
-      var response = await client.get(CharityApiStrings().uriBySearch(s)!);
-      if (response.statusCode == 200) {
-        final jsonString = response.body;
-        final charities = charityFromJson(jsonString);
-        return charities;
-      } else {
-        //show error message
-        return [];
-      }
+  Future<List<Charity>> fetchCharitiesBySearch(String? s) async {
+    if (s == null || s.isEmpty) {
+      return [];
+    }
+
+    var response = await client.get(CharityApiStrings().uriBySearch(s)!);
+    if (response.statusCode == 200) {
+      final jsonString = response.body;
+      final charities = charityFromJson(jsonString);
+      return charities;
     } else {
+      //show error message
       return [];
     }
   }

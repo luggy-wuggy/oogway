@@ -4,7 +4,6 @@ import 'package:oogway/src/common/constants/ui.dart';
 import 'package:oogway/src/common/extensions/string_extension.dart';
 import 'package:oogway/src/domain/usecases/account/sign_out_use_case.dart';
 import 'package:oogway/src/ui/controllers/account_info_controller.dart';
-import 'package:oogway/src/ui/onboard/controllers/controllers.dart';
 import 'package:oogway/src/ui/onboard/widgets/widgets.dart';
 import 'package:oogway/src/ui/root/controllers/index_controller.dart';
 import 'package:oogway/src/ui/widgets/long_button.dart';
@@ -24,8 +23,6 @@ class SettingsView extends ConsumerWidget {
           children: [
             account.when(
               data: (data) {
-                print(data.place.toString());
-
                 return Expanded(
                   child: ListView(
                     children: [
