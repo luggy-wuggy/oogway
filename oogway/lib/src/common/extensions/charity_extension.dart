@@ -12,6 +12,9 @@ extension CharityExtension on Charity {
         (element) {
           return element.contains("cgid=");
         },
+        orElse: () {
+          return "12";
+        },
       );
 
       var id = cgID.split("=");
