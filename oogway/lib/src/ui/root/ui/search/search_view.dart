@@ -43,11 +43,11 @@ class _SearchViewState extends ConsumerState<SearchView> {
   Widget build(BuildContext context) {
     final charitySuggestion = ref.watch(charitySearchProvider);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-      child: Column(
-        children: [
-          Row(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Row(
             children: [
               const Icon(
                 Icons.search,
@@ -91,23 +91,23 @@ class _SearchViewState extends ConsumerState<SearchView> {
                   : const SizedBox.shrink()
             ],
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: charitySuggestion.suggestion.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    CharityCard(
-                      charity: charitySuggestion.suggestion[index],
-                    ),
-                    const SizedBox(height: 20),
-                  ],
-                );
-              },
-            ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: charitySuggestion.suggestion.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  CharityCard(
+                    charity: charitySuggestion.suggestion[index],
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
