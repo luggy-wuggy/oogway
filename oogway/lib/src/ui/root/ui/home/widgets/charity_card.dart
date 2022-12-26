@@ -5,6 +5,8 @@ import 'package:oogway/src/common/constants/ui.dart';
 import 'package:oogway/src/common/extensions/charity_extension.dart';
 import 'package:oogway/src/common/extensions/double_extension.dart';
 import 'package:oogway/src/common/extensions/string_extension.dart';
+import 'package:oogway/src/domain/usecases/charity/favorite_charity_use_case.dart';
+import 'package:oogway/src/domain/usecases/charity/remove_favorited_charity_use_case.dart';
 import 'package:oogway/src/models/charity/charity.dart';
 import 'package:oogway/src/ui/charity_details/charity_details.view.dart';
 import 'package:oogway/src/ui/controllers/favicon_controller.dart';
@@ -123,10 +125,10 @@ class CharityCard extends ConsumerWidget {
 
     return GestureDetector(
       onTap: () {
-        ref.read(oogwayRouterProvider).pushNamed(
-              CharityDetailsView.routeName,
-              extra: charity,
-            );
+        // ref.read(oogwayRouterProvider).pushNamed(
+        //       CharityDetailsView.routeName,
+        //       extra: charity,
+        //     );
       },
       child: Stack(
         children: [
@@ -258,10 +260,20 @@ class CharityCard extends ConsumerWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 16,
             right: 40,
-            child: OogwayFavoriteHeart(),
+            child: OogwayFavoriteHeart(
+              onTap: (bool isFavorited) async {
+                isFavorited
+                    ? await ref
+                        .read(removeFavoritedCharityUseCaseProvider)
+                        .call(charity)
+                    : await ref
+                        .read(favoriteCharityUseCaseProvider)
+                        .call(charity);
+              },
+            ),
           )
         ],
       ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:oogway/src/common/extensions/logger_extension.dart';
 import 'package:oogway/src/common/extensions/string_extension.dart';
+import 'package:oogway/src/models/charity/charity.dart';
 import 'package:oogway/src/models/user.dart';
 import 'package:oogway/src/ui/onboard/controllers/passion_controller.dart';
 import 'package:riverpod/riverpod.dart';
@@ -47,38 +48,39 @@ class OogwayFirestoreDatabase with Logging {
     }
   }
 
-  // Future<void> addFavorite(String uid, Charity charity) async {
-  //   try {
-  //     await _database
-  //         .collection("users")
-  //         .doc(uid)
-  //         .collection("favorites")
-  //         .doc("${charity.ein}")
-  //         .set({
-  //       'title': "${charity.charityName}",
-  //       'ein': "${charity.ein}",
-  //       'category': "${charity.category!.categoryName}",
-  //       'date': Timestamp.now(),
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //     rethrow;
-  //   }
-  // }
+  Future<void> favoriteCharity(String uid, Charity charity) async {
+    final charityJson = charity.toJson();
 
-  // Future<void> removeFavorite(String uid, Charity charity) async {
-  //   try {
-  //     await _database
-  //         .collection("users")
-  //         .doc(uid)
-  //         .collection("favorites")
-  //         .doc("${charity.ein}")
-  //         .delete();
-  //   } catch (e) {
-  //     print(e);
-  //     rethrow;
-  //   }
-  // }
+    try {
+      await _database
+          .collection("users")
+          .doc(uid)
+          .collection("favorites")
+          .doc("${charity.ein}")
+          .set({
+        'title': "${charity.charityName}",
+        'ein': "${charity.ein}",
+        'date': Timestamp.now(),
+      });
+    } catch (e) {
+      logger.e(e);
+      rethrow;
+    }
+  }
+
+  Future<void> removeFavorite(String uid, Charity charity) async {
+    try {
+      await _database
+          .collection("users")
+          .doc(uid)
+          .collection("favorites")
+          .doc("${charity.ein}")
+          .delete();
+    } catch (e) {
+      logger.e(e);
+      rethrow;
+    }
+  }
 
   // Stream<List<FavoriteCharity>> favoritesStream(String uid) {
   //   Stream<QuerySnapshot> stream = _database
