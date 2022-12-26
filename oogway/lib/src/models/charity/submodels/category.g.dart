@@ -6,7 +6,7 @@ part of 'category.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Category _$$_CategoryFromJson(Map<String, dynamic> json) => _$_Category(
+_$_Category _$$_CategoryFromJson(Map json) => _$_Category(
       categoryName: json['categoryName'] as String?,
       categoryId: json['categoryId'] as int?,
       charityNavigatorUrl: json['charityNavigatorUrl'] as String?,

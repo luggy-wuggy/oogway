@@ -49,19 +49,13 @@ class OogwayFirestoreDatabase with Logging {
   }
 
   Future<void> favoriteCharity(String uid, Charity charity) async {
-    final charityJson = charity.toJson();
-
     try {
       await _database
           .collection("users")
           .doc(uid)
           .collection("favorites")
           .doc("${charity.ein}")
-          .set({
-        'title': "${charity.charityName}",
-        'ein': "${charity.ein}",
-        'date': Timestamp.now(),
-      });
+          .set(charity.toJson());
     } catch (e) {
       logger.e(e);
       rethrow;
@@ -82,17 +76,17 @@ class OogwayFirestoreDatabase with Logging {
     }
   }
 
-  // Stream<List<FavoriteCharity>> favoritesStream(String uid) {
-  //   Stream<QuerySnapshot> stream = _database
-  //       .collection("users")
-  //       .doc(uid)
-  //       .collection("favorites")
-  //       .snapshots();
+  Stream<List<Charity>> favoritesStream(String uid) {
+    Stream<QuerySnapshot> stream = _database
+        .collection("users")
+        .doc(uid)
+        .collection("favorites")
+        .snapshots();
 
-  //   return stream.map((query) => query.docs
-  //       .map((doc) => FavoriteCharity.fromDocumentSnapshot(doc))
-  //       .toList());
-  // }
+    return stream.map((query) => query.docs
+        .map((doc) => Charity.fromJson(doc.data() as Map<String, dynamic>))
+        .toList());
+  }
 
   Future<OogwayUser> getUser(String uid) async {
     try {

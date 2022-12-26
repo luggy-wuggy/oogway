@@ -6,7 +6,7 @@ part of 'address.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Address _$$_AddressFromJson(Map<String, dynamic> json) => _$_Address(
+_$_Address _$$_AddressFromJson(Map json) => _$_Address(
       country: json['country'],
       stateOrProvince: json['stateOrProvince'] as String?,
       city: json['city'] as String?,
