@@ -127,10 +127,10 @@ class CharityCard extends ConsumerWidget {
 
     return GestureDetector(
       onTap: () {
-        // ref.read(oogwayRouterProvider).pushNamed(
-        //       CharityDetailsView.routeName,
-        //       extra: charity,
-        //     );
+        ref.read(oogwayRouterProvider).pushNamed(
+              CharityDetailsView.routeName,
+              extra: charity,
+            );
       },
       child: Stack(
         children: [
