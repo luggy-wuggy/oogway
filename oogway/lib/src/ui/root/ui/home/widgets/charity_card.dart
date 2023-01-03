@@ -9,6 +9,7 @@ import 'package:oogway/src/domain/usecases/charity/favorite_charity_use_case.dar
 import 'package:oogway/src/domain/usecases/charity/remove_favorited_charity_use_case.dart';
 import 'package:oogway/src/models/charity/charity.dart';
 import 'package:oogway/src/ui/charity_details/charity_details.view.dart';
+import 'package:oogway/src/ui/controllers/account_info_controller.dart';
 import 'package:oogway/src/ui/controllers/favicon_controller.dart';
 import 'package:oogway/src/ui/widgets/heart.dart';
 import 'package:shimmer/shimmer.dart';
@@ -122,6 +123,7 @@ class CharityCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final faviconCharity = ref.watch(faviconProvider(charity.websiteURL ?? ""));
+    final account = ref.watch(accountInfoProvider);
 
     return GestureDetector(
       onTap: () {
@@ -263,15 +265,26 @@ class CharityCard extends ConsumerWidget {
           Positioned(
             bottom: 16,
             right: 40,
-            child: OogwayFavoriteHeart(
-              onTap: (bool isFavorited) async {
-                isFavorited
-                    ? await ref
-                        .read(removeFavoritedCharityUseCaseProvider)
-                        .call(charity)
-                    : await ref
-                        .read(favoriteCharityUseCaseProvider)
-                        .call(charity);
+            child: account.when(
+              data: (data) {
+                return OogwayFavoriteHeart(
+                  isFavorited: data.favorites.contains(charity),
+                  onTap: (bool isFavorited) async {
+                    isFavorited
+                        ? await ref
+                            .read(removeFavoritedCharityUseCaseProvider)
+                            .call(charity)
+                        : await ref
+                            .read(favoriteCharityUseCaseProvider)
+                            .call(charity);
+                  },
+                );
+              },
+              error: (error, stackTrace) {
+                return Container();
+              },
+              loading: () {
+                return Container();
               },
             ),
           )

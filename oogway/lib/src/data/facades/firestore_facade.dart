@@ -99,7 +99,17 @@ class OogwayFirestoreDatabase with Logging {
           .doc(doc['placeId'])
           .get();
 
-      return OogwayUser.fromDocumentSnapshot(doc, locDoc);
+      QuerySnapshot favQuery = await _database
+          .collection("users")
+          .doc(uid)
+          .collection("favorites")
+          .get();
+
+      return OogwayUser.fromDocumentSnapshot(
+        doc: doc,
+        locDoc: locDoc,
+        favQuery: favQuery,
+      );
     } catch (e) {
       rethrow;
     }
