@@ -6,7 +6,7 @@ part of 'rating.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Rating _$$_RatingFromJson(Map<String, dynamic> json) => _$_Rating(
+_$_Rating _$$_RatingFromJson(Map json) => _$_Rating(
       score: (json['score'] as num?)?.toDouble(),
       rating: json['rating'] as int?,
     );

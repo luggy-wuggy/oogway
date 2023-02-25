@@ -6,7 +6,7 @@ part of 'cause.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Cause _$$_CauseFromJson(Map<String, dynamic> json) => _$_Cause(
+_$_Cause _$$_CauseFromJson(Map json) => _$_Cause(
       causeID: json['causeID'] as int?,
       causeName: json['causeName'] as String?,
       charityNavigatorURL: json['charityNavigatorURL'] as String?,

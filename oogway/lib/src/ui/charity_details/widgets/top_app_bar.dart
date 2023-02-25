@@ -19,7 +19,9 @@ class TopAppBar extends ConsumerWidget {
           icon: Icons.close,
         ),
         const Spacer(),
-        const OogwayFavoriteHeart(),
+        OogwayFavoriteHeart(
+          onTap: (bool isFavorited) async {},
+        ),
       ],
     );
   }

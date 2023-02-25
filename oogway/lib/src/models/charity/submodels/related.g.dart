@@ -6,7 +6,7 @@ part of 'related.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Related _$$_RelatedFromJson(Map<String, dynamic> json) => _$_Related(
+_$_Related _$$_RelatedFromJson(Map json) => _$_Related(
       href: json['href'] as String?,
     );
 

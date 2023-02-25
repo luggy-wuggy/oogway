@@ -6,8 +6,7 @@ part of 'rating_image.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RatingImage _$$_RatingImageFromJson(Map<String, dynamic> json) =>
-    _$_RatingImage(
+_$_RatingImage _$$_RatingImageFromJson(Map json) => _$_RatingImage(
       small: json['small'] as String?,
       large: json['large'] as String?,
     );

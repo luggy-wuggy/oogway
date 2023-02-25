@@ -4,6 +4,7 @@ import 'package:oogway/src/common/constants/ui.dart';
 import 'package:oogway/src/common/extensions/string_extension.dart';
 import 'package:oogway/src/domain/usecases/account/sign_out_use_case.dart';
 import 'package:oogway/src/ui/controllers/account_info_controller.dart';
+import 'package:oogway/src/ui/controllers/favorite_charity_controller.dart';
 import 'package:oogway/src/ui/onboard/widgets/widgets.dart';
 import 'package:oogway/src/ui/root/controllers/index_controller.dart';
 import 'package:oogway/src/ui/widgets/long_button.dart';
@@ -14,6 +15,7 @@ class SettingsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final account = ref.watch(accountInfoProvider);
+    final favorites = ref.watch(favoriteCharitiesProvider);
 
     return Center(
       child: Padding(
@@ -104,6 +106,44 @@ class SettingsView extends ConsumerWidget {
                               ),
                             )
                             .toList(),
+                      ),
+                      Divider(
+                        color: OogwayColors.kPrimaryLightColor.withOpacity(0.2),
+                        thickness: 1,
+                        height: 48,
+                      ),
+                      const Text(
+                        'Favorites',
+                        style: TextStyle(
+                          color: OogwayColors.kPrimaryLightColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Wrap(
+                        runSpacing: 10,
+                        spacing: 5,
+                        direction: Axis.horizontal,
+                        children: favorites.when(
+                          data: (data) {
+                            return data
+                                .map(
+                                  (e) => PassionPills(
+                                    title: e.charityName ?? "",
+                                    pillColor: OogwayColors
+                                        .kPrimaryTransparentDarkColor,
+                                    textColor: OogwayColors.kPrimaryLightColor,
+                                  ),
+                                )
+                                .toList();
+                          },
+                          error: (error, stackTrace) {
+                            return const [SizedBox.shrink()];
+                          },
+                          loading: (() {
+                            return const [SizedBox.shrink()];
+                          }),
+                        ),
                       ),
                     ],
                   ),

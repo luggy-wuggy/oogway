@@ -1,5 +1,6 @@
 import 'package:oogway/src/common/constants/secure_storage.dart';
 import 'package:oogway/src/data/data.dart';
+import 'package:oogway/src/models/charity/charity.dart';
 import 'package:oogway/src/models/user.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -21,6 +22,18 @@ class AccountInfoNotifier extends StateNotifier<AsyncValue<OogwayUser>> {
 
       return user;
     });
+  }
+
+  void favoriteCharity(Charity charity) {
+    final newState = state;
+    newState.value?.favorites.add(charity);
+    state = newState;
+  }
+
+  void removeCharity(Charity charity) {
+    final newState = state;
+    newState.value?.favorites.remove(charity);
+    state = newState;
   }
 }
 

@@ -6,7 +6,7 @@ part of 'irs_classification.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_IrsClassification _$$_IrsClassificationFromJson(Map<String, dynamic> json) =>
+_$_IrsClassification _$$_IrsClassificationFromJson(Map json) =>
     _$_IrsClassification(
       deductibility: json['deductibility'] as String?,
       subsection: json['subsection'] as String?,

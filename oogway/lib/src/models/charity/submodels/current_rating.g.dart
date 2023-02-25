@@ -6,29 +6,31 @@ part of 'current_rating.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CurrentRating _$$_CurrentRatingFromJson(Map<String, dynamic> json) =>
-    _$_CurrentRating(
+_$_CurrentRating _$$_CurrentRatingFromJson(Map json) => _$_CurrentRating(
       score: (json['score'] as num?)?.toDouble(),
       ratingImage: json['ratingImage'] == null
           ? null
-          : RatingImage.fromJson(json['ratingImage'] as Map<String, dynamic>),
+          : RatingImage.fromJson(
+              Map<String, dynamic>.from(json['ratingImage'] as Map)),
       rapidLinks: json['rapidLinks'] == null
           ? null
-          : RapidLinks.fromJson(json['rapidLinks'] as Map<String, dynamic>),
+          : RapidLinks.fromJson(
+              Map<String, dynamic>.from(json['rapidLinks'] as Map)),
       financialRating: json['financialRating'] == null
           ? null
-          : Rating.fromJson(json['financialRating'] as Map<String, dynamic>),
+          : Rating.fromJson(
+              Map<String, dynamic>.from(json['financialRating'] as Map)),
       accountabilityRating: json['accountabilityRating'] == null
           ? null
           : Rating.fromJson(
-              json['accountabilityRating'] as Map<String, dynamic>),
+              Map<String, dynamic>.from(json['accountabilityRating'] as Map)),
     );
 
 Map<String, dynamic> _$$_CurrentRatingToJson(_$_CurrentRating instance) =>
     <String, dynamic>{
       'score': instance.score,
-      'ratingImage': instance.ratingImage,
-      'rapidLinks': instance.rapidLinks,
-      'financialRating': instance.financialRating,
-      'accountabilityRating': instance.accountabilityRating,
+      'ratingImage': instance.ratingImage?.toJson(),
+      'rapidLinks': instance.rapidLinks?.toJson(),
+      'financialRating': instance.financialRating?.toJson(),
+      'accountabilityRating': instance.accountabilityRating?.toJson(),
     };

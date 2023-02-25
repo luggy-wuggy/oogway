@@ -6,12 +6,13 @@ part of 'active.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Active _$$_ActiveFromJson(Map<String, dynamic> json) => _$_Active(
+_$_Active _$$_ActiveFromJson(Map json) => _$_Active(
       rapidLinks: json['rapidLinks'] == null
           ? null
-          : RapidLinks.fromJson(json['rapidLinks'] as Map<String, dynamic>),
+          : RapidLinks.fromJson(
+              Map<String, dynamic>.from(json['rapidLinks'] as Map)),
     );
 
 Map<String, dynamic> _$$_ActiveToJson(_$_Active instance) => <String, dynamic>{
-      'rapidLinks': instance.rapidLinks,
+      'rapidLinks': instance.rapidLinks?.toJson(),
     };
